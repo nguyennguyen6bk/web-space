@@ -1,0 +1,23 @@
+services:
+  drupal:
+    image: nguyen0710/drupal_hub_web:v1
+    container_name: drupal_web
+    restart: always
+    ports:
+      - "8082:80"
+    depends_on:
+      - mysql
+    environment:
+      - DRUPAL_DB_HOST=mysql
+      - DRUPAL_DB_NAME=drupal
+      - DRUPAL_DB_USER=drupaluser
+      - DRUPAL_DB_PASSWORD=drupalpass
+  mysql:
+    image: nguyen0710/drupal_hub_mysql:v1
+    container_name: drupal_mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupaluser
+      MYSQL_PASSWORD: drupalpass
+      MYSQL_ROOT_PASSWORD: rootpass
