@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  magento_web:
+    image: nguyen0710/magento2_test_web:v1
+    container_name: magento_apache
+    ports:
+      - "8084:80"                   # Map port host 8084 -> container 80
+    depends_on:
+      - magento_mariadb
+      - magento_opensearch
+      - magento_redis
+      - magento_rabbitmq
+    environment:
+      - MYSQL_HOST=magento_mariadb
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - OPENSEARCH_HOST=magento_opensearch
+      - RABBITMQ_HOST=magento_rabbitmq
+      - REDIS_HOST=magento_redis
+      - MAGENTO_BASE_URL=${MAGENTO_BASE_URL}
+    networks:
+      - magento_net
+
+  magento_mariadb:
+    image: nguyen0710/magento_mariadb:v1
+    container_name: magento_mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - magento_net
+
+  magento_opensearch:
+    image: nguyen0710/magento_opensearch:v1
+    container_name: magento_opensearch
+    restart: always
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - OPENSEARCH_JAVA_OPTS=-Xms1g -Xmx1g
+      - DISABLE_SECURITY_PLUGIN=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - magento_net
+
+  magento_redis:
+    image: nguyen0710/magento_redis:v1
+    container_name: magento_redis
+    restart: always
+    networks:
+      - magento_net
+
+  magento_rabbitmq:
+    image: nguyen0710/magento_rabbitmq:v1
+    container_name: magento_rabbitmq
+    restart: always
+    networks:
+      - magento_net
+
+networks:
+  magento_net:
+    driver: bridge
