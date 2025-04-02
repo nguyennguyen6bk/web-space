@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   magento_web:
     image: nguyen0710/magento2_test_web:v1
