@@ -22,7 +22,7 @@ services:
       - magento_net
 
   magento_mariadb:
-    image: nguyen0710/magento_mariadb:v1
+    image: nguyen0710/magento_mariadb_hub:v1
     container_name: magento_mariadb
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
