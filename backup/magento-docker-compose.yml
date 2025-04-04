@@ -29,11 +29,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      retries: 3
-      timeout: 5s
     networks:
       - magento_net
 
@@ -50,11 +45,6 @@ services:
       memlock:
         soft: -1
         hard: -1
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9200"]
-      interval: 10s
-      retries: 3
-      timeout: 5s
     networks:
       - magento_net
 
@@ -62,11 +52,6 @@ services:
     image: nguyen0710/magento_redis:v1
     container_name: magento_redis
     restart: always
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      retries: 3
-      timeout: 3s
     networks:
       - magento_net
 

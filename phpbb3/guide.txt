@@ -1,0 +1,4 @@
+1. Clone github
+2. Run command line: docker-compose up -d 
+3. access link: http://localhost:8083/
+4. account Admin to use app (username : admin / password: Admin123)
