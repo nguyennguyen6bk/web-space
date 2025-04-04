@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  jorani:
+    image: nguyen0710/jorani_app_hub:v1
+    container_name: jorani_app_pull
+    ports:
+      - "8085:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - jorani_network
+
+  mysql:
+    image: nguyen0710/jorani_mysql_hub:v1
+    container_name: jorani_mysql_hub
+    restart: always
+    environment:
+      MYSQL_DATABASE: jorani
+      MYSQL_USER: jorani
+      MYSQL_PASSWORD: jorani
+      MYSQL_ROOT_PASSWORD: jorani
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 3
+      timeout: 5s
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - jorani_network
+
+volumes:
+  mysql_data:
+
+networks:
+  jorani_network:
+    driver: bridge
+
