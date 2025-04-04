@@ -1,0 +1,25 @@
+services:
+  phpbb:
+    image: nguyen0710/phpbb_app_hub:v1  # Đây là image phpBB bạn đã push lên Docker Hub
+    container_name: phpbb-app-pull
+    ports:
+      - "8083:80"  # Mở port 8083 trên máy host để truy cập ứng dụng phpBB
+    networks:
+      - phpbb-net
+    depends_on:
+      - mysql  # Đảm bảo MySQL đã chạy trước khi phpBB khởi động
+
+  mysql:
+    image: nguyen0710/phpbb_mysql_hub:v1  # Bạn có thể thay đổi thành version khác nếu cần
+    container_name: phpbb-mysql-pull
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password  # Đặt mật khẩu root cho MySQL
+      MYSQL_DATABASE: phpbb  # Tên database bạn muốn tạo
+      MYSQL_USER: phpbb  # Tên người dùng MySQL
+      MYSQL_PASSWORD: phpbb_password  # Mật khẩu cho người dùng phpbb
+    networks:
+      - phpbb-net
+networks:
+  phpbb-net:
+    driver: bridge
