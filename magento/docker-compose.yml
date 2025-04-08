@@ -1,14 +1,19 @@
 services:
   magento_web:
-    image: nguyen0710/magento2_test_web:v1
+    image: nguyen0710/magento_apache:v1
     container_name: magento_apache
     ports:
       - "8084:80"                   # Map port host 8084 -> container 80
     depends_on:
-      - magento_mariadb
-      - magento_opensearch
-      - magento_redis
-      - magento_rabbitmq
+      magento_mariadb:
+        condition: service_healthy
+      magento_opensearch:
+        condition: service_healthy
+      magento_redis:
+        condition: service_healthy
+    command: >
+      sh -c "dockerize -wait tcp://magento_mariadb:3306 -wait tcp://magento_opensearch:9200 -wait tcp://magento_redis:6379 -timeout 60s && echo '✅ All dependencies are ready. Starting Apache...' && apache2-foreground"
+
     environment:
       - MYSQL_HOST=magento_mariadb
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -18,6 +23,8 @@ services:
       - RABBITMQ_HOST=magento_rabbitmq
       - REDIS_HOST=magento_redis
       - MAGENTO_BASE_URL=${MAGENTO_BASE_URL}
+    healthcheck:
+      disable: true
     networks:
       - magento_net
 
@@ -33,7 +40,7 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       retries: 3
-      timeout: 5s
+      timeout: 10s
       start_period: 20s # Tăng thời gian để MySQL khởi động đầy đủ
     networks:
       - magento_net
@@ -56,6 +63,7 @@ services:
       interval: 10s
       retries: 3
       timeout: 5s
+      start_period: 20s
     networks:
       - magento_net
 
@@ -68,6 +76,7 @@ services:
       interval: 10s
       retries: 3
       timeout: 3s
+      start_period: 20s
     networks:
       - magento_net
 

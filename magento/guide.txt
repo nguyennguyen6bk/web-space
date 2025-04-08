@@ -1,5 +1,6 @@
 1. Clone github
 2. Run command line: docker-compose up -d 
-4. access link: http://localhost:8084/ for frontend. try refresh (F5) if you have a problem with Cache
+3. Run docker ps -a to check status() before using services.
+4. access link: http://localhost:8084/ for frontend. Try refresh if services not up yet.
 5. http://localhost:8084/admin_1n47uy/ for backend (username : admin / password: Admin123)
 6. For swagger access: http://localhost:8084/swagger
