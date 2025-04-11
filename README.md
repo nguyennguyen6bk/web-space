@@ -35,8 +35,6 @@ Whether you're developing and testing autonomous agents, evaluating automation s
 
 ## 💻 System Requirements
 
-## 💻 System Requirements
-
 To run the web applications in this playground, ensure your system meets the following minimum requirements:
 
 - **Operating System**: Windows 10+, macOS, or Linux
