@@ -49,8 +49,8 @@ To run the web applications in this playground, ensure your system meets the fol
 Clone the project and run web apps using Docker:
 
 ```bash
-git clone https://github.com/your-username/your-project.git
-cd your-project
+git clone https://github.com/nguyennguyen6bk/web-space.git
+cd web-space
 # Navigate into any app folder and start it using Docker Compose:
 cd magento
 docker compose up -d
