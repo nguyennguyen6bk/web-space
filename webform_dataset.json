@@ -1,0 +1,21 @@
+{
+    "dataset_name": "WebFormDataSet",
+    "version": "1.0",
+    "applications": [
+      {
+        "app_id": "app_001",
+        "name": "Magento",
+        "type": "Ecommerce",
+        "task_count": 50,
+        "task_file": "Magento_TestScenarios_Default.xlsx"
+      },
+      {
+        "app_id": "app_002",
+        "name": "Odoo",
+        "type": "CRM",
+        "task_count": 30,
+        "task_file": "Odoo_TestScenarios_Default.xlsx"
+      }
+    ]
+  }
+  
