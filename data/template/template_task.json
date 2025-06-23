@@ -1,0 +1,44 @@
+{
+    "task_id":"{{task_id}}",
+    "task_description":"{{task_description}}",
+    "task_type":"{{task_type}}",
+    "start_url":"{{start_url}}",
+    "require_login": "true|false",
+    "eval":{
+        "eval_type":[
+            "string_match",
+            "regex_match",
+            "url_match",
+            "html_match"
+        ],
+        "string_match":{
+            "match_type":"exact|contains|senmatic|starts_with|ends_with",
+            "match_value":"{{match_value}}"
+        },
+        "regex_match":{
+            "{{field_name1}}": {
+                "pattern": "{{regex_pattern1}}",
+                "required": "true|false",
+                "description": "{{description}}"
+            },
+            "{{field_name2}}": {
+                "pattern": "{{regex_pattern2}}",
+                "required": "true|false",
+                "description": "{{description}}"
+            }
+        },
+        "url_match":{
+            "url":"last",
+            "match_type":"exact|contains|starts_with|ends_with",
+            "match_value":"__SHOPPING__URL__/create-account"
+        },
+        "html_match":{
+            "url":"{{target_url}}",
+            "dom_extractor":"{{javascript}}",
+            "match_type":"exact|contains|starts_with|ends_with",
+            "match_value":"{{match_value}}",
+            "description":"{{description}}"
+        }
+
+    }
+}

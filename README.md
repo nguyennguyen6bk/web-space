@@ -53,11 +53,11 @@ git clone https://github.com/nguyennguyen6bk/web-space.git
 cd web-space
 # Navigate into any app folder and start it using Docker Compose:
 cd magento
-docker compose up -d
+docker compose up -d --wait
 #Each app will be available on a different local port. Example:
 E-commerce App: http://localhost:8084
 CRM App: http://localhost:8087
 ERP App: http://localhost:8069
 # To stop a running app:
-docker compose down
+docker compose down -v
 📘 Note: For specific usage instructions, credentials, or extra configurations, please refer to the guide.txt inside each app's folder

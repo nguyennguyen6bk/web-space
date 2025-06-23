@@ -1,0 +1,1072 @@
+[
+    {
+        "task_id": "t00",
+        "task_description": "Open Watches menu and retrieve the name of the first product in the list.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match",
+                "regex_match",
+                "url_match",
+                "dom_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "Aim Analog Watch"
+            },
+            "regex_match": {
+                "email": {
+                    "pattern": "^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$",
+                    "required": "true",
+                    "description": "A valid email address format (e.g., user@example.com)"
+                },
+                "password": {
+                    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+=\\-]{8,}$",
+                    "required": "true",
+                    "description": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, and one number"
+                }
+            },
+            "url_match": {
+                "url": "last",
+                "match_type": "contains",
+                "match_value": "customer/account"
+            },
+            "dom_match": {
+                "url": "http://localhost:8084/aim-analog-watch.html",
+                "dom_extractor": "document.querySelector('#old-price-36 .price').innerText;",
+                "match_type": "exact",
+                "match_value": "$45.00",
+                "description": "{{description}}"
+            }
+        }
+    },
+    {
+        "task_id": "t01",
+        "task_description": "Open all 'Jackets' menus and retrieve the name of the first product from each.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match",
+                "regex_match",
+                "url_match",
+                "dom_match"
+            ],
+            "string_match": {
+                "match_type": "contains",
+                "match_value": [
+                    "Beaumont Summit Kit",
+                    "Stellar Solar Jacket"
+                ]
+            },
+            "regex_match": {
+                "email": {
+                    "pattern": "^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$",
+                    "required": "true",
+                    "description": "A valid email address format (e.g., user@example.com)"
+                },
+                "password": {
+                    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+=\\-]{8,}$",
+                    "required": "true",
+                    "description": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, and one number"
+                }
+            },
+            "url_match": {
+                "url": "last",
+                "match_type": "contains",
+                "match_value": "customer/account"
+            },
+            "dom_match": {
+                "url": "http://localhost:8084/aim-analog-watch.html",
+                "dom_extractor": "document.querySelector('#old-price-36 .price').innerText;",
+                "match_type": "exact",
+                "match_value": "$45.00",
+                "description": "{{description}}"
+            }
+        }
+    },
+    {
+        "task_id": "1",
+        "task_description": "Retrieve the name of the first product listed in the \"Watches\" category",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "Aim Analog Watch"
+            }
+        }
+    },
+    {
+        "task_id": "2",
+        "task_description": "Open all 'Jackets' menus and retrieve the name of the first product from each.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "contains",
+                "match_value": [
+                    "Beaumont Summit Kit",
+                    "Stellar Solar Jacket"
+                ]
+            }
+        }
+    },
+    {
+        "task_id": "3",
+        "task_description": "Open the \"Pants\" category under \"Women\", then retrieve the name of the 13th product in the list.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "Portia Capri"
+            }
+        }
+    },
+    {
+        "task_id": "4",
+        "task_description": "Ensure the cart is empty. Then purchase 3 units of the product named \"Push It Messenger Bag\" using the cheapest available shipping method. What is the total order amount?",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "contains",
+                "match_value": "$135.00"
+            }
+        }
+    },
+    {
+        "task_id": "5",
+        "task_description": "Create a new customer account, then return the registered email and password in JSON format",
+        "task_type": "form",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "regex_match",
+                "dom_match"
+            ],
+            "regex_match": {
+                "email": {
+                    "pattern": "^[\\w.-]+@[\\w.-]+\\.\\w{2,}$",
+                    "required": true,
+                    "description": "A valid email address (e.g., user@example.com)"
+                },
+                "password": {
+                    "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{8,}$",
+                    "required": true,
+                    "description": "At least 8 characters, including uppercase, lowercase, number, and special character"
+                }
+            },
+            "dom_match": {
+                "url": "http://localhost:8084/customer/account/",
+                "dom_extractor": "document.querySelector('span.logged-in').innerText",
+                "match_type": "contains",
+                "match_value": "Welcome,",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "6",
+        "task_description": "Add a product named 'Push It Messenger Bag' to cart and what is the url of shopping cart page ?",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "url_match"
+            ],
+            "url_match": {
+                "url": "last",
+                "match_type": "contains",
+                "match_value": "customer/account"
+            }
+        }
+    },
+    {
+        "task_id": "7",
+        "task_description": "Subscribe to the website via the subscription field with email \"account.test.4@mynes.com\"",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "last",
+                "dom_extractor": "document.querySelector('.message-success.success.message > div').innerText'",
+                "match_type": "contains",
+                "match_value": "Thank you for your subscription.",
+                "description": "Verify that the success message 'Thank you for your subscription.' is displayed after subscribing."
+            }
+        }
+    },
+    {
+        "task_id": "8",
+        "task_description": "Place an order as a customer, then return the order number in JSON format using the key order_number.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "regex_match"
+            ],
+            "regex_match": {
+                "order_number": {
+                    "pattern": "^0000\\d{4}$",
+                    "required": true,
+                    "description": ""
+                }
+            }
+        }
+    },
+    {
+        "task_id": "9",
+        "task_description": "Place an order as a guest, then return the order number in JSON format using the key order_number.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "regex_match"
+            ],
+            "regex_match": {
+                "order_number": {
+                    "pattern": "^0000\\d{4}$",
+                    "required": true,
+                    "description": ""
+                }
+            }
+        }
+    },
+    {
+        "task_id": "10",
+        "task_description": "Empty wishlist pasge and then save \"Josie Yoga Jacket\" to wishlist and verify it appears in the wishlist page.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/wishlist/",
+                "dom_extractor": "[...document.querySelectorAll('strong.product-item-name a')].some(a => a.innerText.includes('Josie Yoga Jacket'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "11",
+        "task_description": "Place an order for the product 'Hyperion Elements Jacket - XL - Red' for the user with the email address \"account.test.2@mynes.com\".",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "last",
+                "dom_extractor": "document.querySelector('[data-ui-id=\"messages-message-success\"]').innerText",
+                "match_type": "contains",
+                "match_value": "You created the order.",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "12",
+        "task_description": "Retrieve the latest comment of order #000000003.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "Your order has been received."
+            }
+        }
+    },
+    {
+        "task_id": "13",
+        "task_description": "Retrieve the tracking number of order #000000004",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "0968774816"
+            }
+        }
+    },
+    {
+        "task_id": "14",
+        "task_description": "what is the Subtotal after applying the coupon code 'save5percent' to product \"Erika Running Short\" size:32 color:Red\"?",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "$42.75"
+            }
+        }
+    },
+    {
+        "task_id": "15",
+        "task_description": "Create a cart price rule named \"10% Off on Orders Over $15\" with a specific coupon code \"save10percentfororderover15dollar\", which give  a 10% discount to any orders with a subtotal of $10 or more. Then, purchase the product \"Sprite Foam Roller\" and what is the Subtotal after applying the coupon?",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "contains",
+                "match_value": "18.05"
+            }
+        }
+    },
+    {
+        "task_id": "16",
+        "task_description": "Create a product named 'Bag hand made' with attribute set 'Bag', price $30 quantity 100, in stock, assigned to category 'Bag', and visible on the storefront.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/bag-hand-made.html",
+                "dom_extractor": "document.querySelector('#product-price-2041 .price').innerText",
+                "match_type": "exact",
+                "match_value": "$30.00",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "17",
+        "task_description": "Change stock staus of product \"Endurance Watch\"  to \"Out of Stock\" and verify message on product page.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/endurance-watch.html",
+                "dom_extractor": "document.querySelector('div.stock.unavailable span').innerText.trim()",
+                "match_type": "exact",
+                "match_value": "OUT OF STOCK",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "18",
+        "task_description": "Count how many items are listed on the second page of the “Pants” subcategory under the “Women” category.",
+        "task_type": "Lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "2"
+            }
+        }
+    },
+    {
+        "task_id": "19",
+        "task_description": "Disable a product \"Compete Track Tote\" and verify storefront visibility.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/compete-track-tote.html",
+                "dom_extractor": "document.querySelector('span[data-ui-id=\"page-title-wrapper\"]').innerText;",
+                "match_type": "contains",
+                "match_value": "Whoops, our bad...",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "20",
+        "task_description": "Enable \"Voyage Yoga Bag\" and verify storefront visibility.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/voyage-yoga-bag.html",
+                "dom_extractor": "document.querySelector('span[data-ui-id=\"page-title-wrapper\"]').innerText;",
+                "match_type": "contains",
+                "match_value": "Voyage Yoga Bag",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "21",
+        "task_description": "Modify Content Heading of About US page to \"About Our Company\" and verify on the About Us page.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/about-us",
+                "dom_extractor": "document.querySelector('span[data-ui-id=\"page-title-wrapper\"]').innerText;",
+                "match_type": "exact",
+                "match_value": "About Our Company",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "22",
+        "task_description": "Compare two products \"Rival Field Messenger\" and \"Fusion Backpack\", then verify the comparison table.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/catalog/product_compare/",
+                "dom_extractor": "[...document.querySelectorAll('td.cell.product.info a')].map(a => a.title).some(t => ['Rival Field Messenger', 'Fusion Backpack'].includes(t))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "23",
+        "task_description": "Perform Full Refund Using Default Values for Order \"000000009\"",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/admin_1n47uy/sales/order/view/order_id/9",
+                "dom_extractor": "document.querySelector('#order_history_block .note-list-comment').innerText",
+                "match_type": "exact",
+                "match_value": "We refunded $63.71 offline.",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "24",
+        "task_description": "Perform partial refund using default values for product \"Josie Yoga Jacket (Size XL, Gray)\" in Order \"000000010\" .",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/admin_1n47uy/sales/order/view/order_id/10",
+                "dom_extractor": "document.querySelector('#order_history_block .note-list-comment').innerText",
+                "match_type": "contains",
+                "match_value": "We refunded $56.25 offline",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "25",
+        "task_description": "Reorder the Most Recent Order of Customer \"Veronica Costello\" and return Total Paid.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match",
+                "dom_match"
+            ],
+            "string_match": {
+                "match_type": "contains",
+                "match_value": "63.71"
+            },
+            "dom_match": {
+                "url": "last",
+                "dom_extractor": "document.querySelector('#order_history_block .note-list-comment').innerText",
+                "match_type": "contains",
+                "match_value": "Order Placed by Admin User using Admin Panel",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "26",
+        "task_description": "Reorder the most recent customer order from the storefront.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/sales/order/history/",
+                "dom_extractor": "document.querySelector('td.col.total .price').innerText",
+                "match_type": "exact",
+                "match_value": "$50.00",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "27",
+        "task_description": "Update CMS Page Content.\nChange the page heading from \"Luma Delivery and Returns\" to \"Luna Service Team\" and check it on storefront",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/customer-service",
+                "dom_extractor": "document.querySelector('.customer-service.cms-content h2').innerText",
+                "match_type": "exact",
+                "match_value": "Luna Service Team",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "28",
+        "task_description": "Create a CMS page \"'Store Location'\" and check its visibility on the frontend.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/store-location",
+                "dom_extractor": "document.querySelector('.breadcrumbs ul.items li.item.cms_page strong').innerText",
+                "match_type": "exact",
+                "match_value": "Store Location",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "29",
+        "task_description": "Update the price of the existing product with SKU: 24-WG088 to $15 and verify the updated price on the storefront.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8084/sprite-foam-roller.html",
+                "dom_extractor": "document.querySelector('#product-price-22 .price').innerText",
+                "match_type": "contains",
+                "match_value": "$15.00",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "30",
+        "task_description": "Retrieve the current rating in percent of the product named 'Fusion Backpack'.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "67%"
+            }
+        }
+    },
+    {
+        "task_id": "31",
+        "task_description": "Create new projects \"Demo Website\"",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "last",
+                "dom_extractor": "document.querySelector('#flash_notice').innerText",
+                "match_type": "exact",
+                "match_value": "Successful creation.",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "32",
+        "task_description": "Update \"Demo Shop\" description to \"Demo Shop is an eCommerce website based on the Magento platform.\"",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/projects/demo-shop",
+                "dom_extractor": "document.querySelector('.wiki p').innerText",
+                "match_type": "exact",
+                "match_value": "Demo Shop is an eCommerce website based on the Magento platform.",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "33",
+        "task_description": "Disable WIKI module in Demo Shop project",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/projects/demo-shop/wiki",
+                "dom_extractor": "document.querySelector('#errorExplanation').innerText;",
+                "match_type": "contains",
+                "match_value": "You are not authorized to access this page.",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "34",
+        "task_description": "Enable the \"News\" module in the \"Demo Shop\" project, then create a new news item titled \"Official Customer Demo Scheduled for Next Thursday\".",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/projects/demo-shop/news",
+                "dom_extractor": "document.querySelector('.news-article h3 a').innerText",
+                "match_type": "contains",
+                "match_value": "Official Customer Demo Scheduled for Next Thursday",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "35",
+        "task_description": "Close Demo App project",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/projects/demo-app",
+                "dom_extractor": "document.querySelector('p.warning').innerText;",
+                "match_type": "exact",
+                "match_value": "This project is closed and read-only.",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "36",
+        "task_description": "Create new users (with appropriate permissions)",
+        "task_type": "form",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "last",
+                "dom_extractor": "document.querySelector('#flash_error').innerText",
+                "match_type": "contains",
+                "match_value": "Your account was created and is now pending administrator approval.",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "37",
+        "task_description": "Assign user with email \"nguyen.merkle@gmail.com\" to project \"Demo Shop\" with role \"Developer\"",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/users/6",
+                "dom_extractor": "document.querySelector('tbody tr:last-child td.project.name a').innerText",
+                "match_type": "exact",
+                "match_value": "Demo Shop",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "38",
+        "task_description": "Enforce a password change on next login for the user whose email is \"account.test.3@mynes.com\".",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/users/7/edit",
+                "dom_extractor": "document.querySelector('#user_must_change_passwd').value",
+                "match_type": "exact",
+                "match_value": "1",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "39",
+        "task_description": "Register a new user with email \"account.test.1@mynes.com\"",
+        "task_type": "form",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/users",
+                "dom_extractor": "document.querySelector('tr.user:first-of-type td.mail').innerText;",
+                "match_type": "exact",
+                "match_value": "account.test.1@mynes.com",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "40",
+        "task_description": "Display the \"Status\" column in the user list",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "last",
+                "dom_extractor": "document.querySelector('th.status').innerText",
+                "match_type": "exact",
+                "match_value": "Status",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "41",
+        "task_description": "Create new version \"version3\" for project \"Demo Shop\"",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/projects/demo-shop/settings/versions",
+                "dom_extractor": "document.querySelector('tr.version:last-of-type td.name').innerText",
+                "match_type": "exact",
+                "match_value": "version3",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "42",
+        "task_description": "Assign feature \"3\" to version \"version2\" in project \"Demo Shop\"",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/issues/3",
+                "dom_extractor": "document.querySelector('div.fixed-version.attribute div.value a').innerText",
+                "match_type": "exact",
+                "match_value": "version2",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "43",
+        "task_description": "Create a custom field named 'Environment' for the 'Bug' tracker across all projects, using a dropdown list with the values: Internal, UAT, and Production.",
+        "task_type": "Lookup",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/issues/4/edit",
+                "dom_extractor": "document.getElementById([...document.querySelectorAll('label')].find(l => l.querySelector('span')?.textContent.trim() === 'Environment')?.getAttribute('for'))?.innerHTML",
+                "match_type": "contains",
+                "match_value": [
+                    "Internal",
+                    "UAT",
+                    "Production"
+                ],
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "44",
+        "task_description": "Create a custom field named \"Start Date\" of type Date in the \"Projects\" module, and make it visible to all users.",
+        "task_type": "Lookup",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/projects/demo-shop/settings",
+                "dom_extractor": "document.querySelector(`input#${[...document.querySelectorAll('label')].find(l => l.querySelector('span')?.textContent.trim() === 'Start Date')?.getAttribute('for')}`)?.getAttribute('type')",
+                "match_type": "exact",
+                "match_value": "date",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "45",
+        "task_description": "Modify the workflow for Developers in the Bug Tracker so that they cannot transition issues from New to the Closed status.",
+        "task_type": "Lookup",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/workflows/edit?role_id[]=4&tracker_id[]=1&used_statuses_only=0&used_statuses_only=1",
+                "dom_extractor": "document.getElementById('transitions_1_5_always').checked",
+                "match_type": "exact",
+                "match_value": false,
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "46",
+        "task_description": "Configure the workflow to allow users with the \"Developer\" role to transition a bug from the \"Rejected\" status back to \"In Progress\".",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/workflows/edit?role_id[]=4&tracker_id[]=1&used_statuses_only=0&used_statuses_only=1",
+                "dom_extractor": "document.getElementById('transitions_6_2_always').checked",
+                "match_type": "exact",
+                "match_value": true,
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "47",
+        "task_description": "Configure the workflow to allow users with the \"Manager\" role to transition issues in the \"Feature\" tracker from the \"Closed\" status back to \"New\".",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/workflows/edit?role_id[]=3&tracker_id[]=2&used_statuses_only=0",
+                "dom_extractor": "document.getElementById('transitions_5_1_always').checked",
+                "match_type": "exact",
+                "match_value": true,
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "48",
+        "task_description": "Create a new role named \"QC\", and configure the workflow so that users with this role can set issues in the \"Bug\" tracker to the \"In Progress\" status.",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "last",
+                "dom_extractor": "document.getElementById('transitions_0_2_always').checked",
+                "match_type": "exact",
+                "match_value": true,
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "49",
+        "task_description": "Rename role \"Testing\" to \"QA\".",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/roles",
+                "dom_extractor": "[...document.querySelectorAll('.ui-sortable .givable .name')].some(el => el.textContent.includes('QA'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "50",
+        "task_description": "Create a new status \"Pending\" for Issue",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/issue_statuses",
+                "dom_extractor": "[...document.querySelectorAll('.ui-sortable .name')].some(el => el.textContent.includes('Pending'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "51",
+        "task_description": "Create a custom field named \"Test Case Link\" of type Link in the Bug Tracker module, visible to all users and applicable to all projects.",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/custom_fields?tab=IssueCustomField",
+                "dom_extractor": "[...document.querySelectorAll('a')].find(a => a.textContent.trim() === 'Test Case Link')?.closest('tr')?.children[1]?.textContent.trim()",
+                "match_type": "exact",
+                "match_value": "Link",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "52",
+        "task_description": "Move the \"Closed\" issue status to the last position in the \"Issue statuses\" board configuration.",
+        "task_type": "operation",
+        "start_url": "__PROJECT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8089/issue_statuses",
+                "dom_extractor": "document.querySelector('tbody tr:last-child .name').innerText",
+                "match_type": "exact",
+                "match_value": "Closed",
+                "description": ""
+            }
+        }
+    }
+]

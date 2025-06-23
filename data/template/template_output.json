@@ -1,0 +1,8 @@
+{
+  "string_match": "Welcome back!",
+  "regex_match": {
+    "email": "test_email@example.com"
+  },
+  "url_match": "https://example.com/dashboard/home",
+  "html_match": "Your order has been received."
+}

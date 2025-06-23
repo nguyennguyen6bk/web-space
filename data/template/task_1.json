@@ -1,0 +1,32 @@
+{
+    "task_id":"1",
+    "task_description":"create a new customer on storefront",
+    "task_type":"webform",
+    "start_url":"__SHOPPING__URL__",
+    "require_login":false,
+    "eval":{
+        "eval_type":[
+            "regex_match",
+            "url_match"
+        ],
+        "regex_match":{
+            "email":{
+                "pattern":"^[\\w.-]+@[\\w.-]+\\.\\w{2,}$",
+                "required": true
+            },
+            "password":{
+                "pattern":"^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+                "required": true
+            },
+            "phone":{
+                "pattern":"^\\+?[1-9]\\d{1,14}$",
+                "required": false
+            }
+        },
+        "url_match":{
+            "reference_url":"__SHOPPING__URL__/create-account",
+            "match_type":"exact"
+        }
+
+    }
+}

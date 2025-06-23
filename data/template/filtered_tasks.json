@@ -1,0 +1,475 @@
+[
+  {
+    "sites": [
+      "shopping_admin"
+    ],
+    "task_id": 14,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_admin_state.json",
+    "start_url": "__SHOPPING_ADMIN__",
+    "geolocation": null,
+    "intent_template": "Tell me the the number of reviews that our store received by far that mention term \"{{term}}\"",
+    "instantiation_dict": {
+      "term": "not useful"
+    },
+    "intent": "Tell me the the number of reviews that our store received by far that mention term \"not useful\"",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "string_match"
+      ],
+      "reference_answers": {
+        "must_include": [
+          "0"
+        ]
+      },
+      "reference_url": "",
+      "program_html": [],
+      "string_note": "",
+      "reference_answer_raw_annotation": "0"
+    },
+    "intent_template_id": 288
+  },
+  {
+    "sites": [
+      "shopping"
+    ],
+    "task_id": 47,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_state.json",
+    "start_url": "__SHOPPING__",
+    "geolocation": null,
+    "intent_template": "Today is 6/12/2023. Tell me how many fulfilled orders I have {{period}}, and the total amount of money I spent.",
+    "instantiation_dict": {
+      "period": "over the past month"
+    },
+    "intent": "Today is 6/12/2023. Tell me how many fulfilled orders I have over the past month, and the total amount of money I spent.",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "string_match"
+      ],
+      "reference_answers": {
+        "fuzzy_match": [
+          "0 order",
+          "$0 total spend"
+        ]
+      },
+      "reference_url": "",
+      "program_html": [],
+      "string_note": "",
+      "reference_answer_raw_annotation": "0 order, $0 total spend"
+    },
+    "intent_template_id": 197
+  },
+  {
+    "sites": [
+      "shopping_admin"
+    ],
+    "task_id": 157,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_admin_state.json",
+    "start_url": "__SHOPPING_ADMIN__",
+    "geolocation": null,
+    "intent_template": "Show all customers",
+    "instantiation_dict": {},
+    "intent": "Show all customers",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "url_match"
+      ],
+      "reference_answers": null,
+      "reference_url": "__SHOPPING_ADMIN__/customer/index/",
+      "program_html": [],
+      "url_note": "GOLD in PRED"
+    },
+    "intent_template_id": 255
+  },
+  {
+    "sites": [
+      "gitlab"
+    ],
+    "task_id": 181,
+    "require_login": true,
+    "storage_state": "./.auth/gitlab_state.json",
+    "start_url": "__GITLAB__",
+    "geolocation": null,
+    "intent_template": "Open my latest created issue that has {{keyword}} in its title to check if it is closed",
+    "instantiation_dict": {
+      "keyword": "theme editor"
+    },
+    "intent": "Open my latest created issue that has theme editor in its title to check if it is closed",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "string_match",
+        "url_match"
+      ],
+      "reference_answers": {
+        "exact_match": "No"
+      },
+      "reference_url": "__GITLAB__/byteblaze/a11y-syntax-highlighting/-/issues/1",
+      "program_html": [],
+      "reference_answer_raw_annotation": "Not closed",
+      "string_note": ""
+    },
+    "intent_template_id": 500
+  },
+  {
+    "sites": [
+      "wikipedia",
+      "map"
+    ],
+    "task_id": 266,
+    "require_login": true,
+    "storage_state": null,
+    "start_url": "__MAP__",
+    "geolocation": null,
+    "intent_template": "What's the closest national park to {{city}}?",
+    "instantiation_dict": {
+      "city": "the largest city in Maine"
+    },
+    "intent": "What's the closest national park to the largest city in Maine?",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "string_match"
+      ],
+      "reference_answers": {
+        "exact_match": "Acadia National Park"
+      },
+      "reference_url": "",
+      "program_html": [],
+      "string_note": "",
+      "reference_answer_raw_annotation": "Acadia National Park"
+    },
+    "intent_template_id": 85
+  },
+  {
+    "sites": [
+      "shopping"
+    ],
+    "task_id": 271,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_state.json",
+    "start_url": "__SHOPPING__",
+    "geolocation": null,
+    "intent_template": "Show me products under ${{price}} in \"{{product_category}}\" category",
+    "instantiation_dict": {
+      "price": "46.99",
+      "product_category": "makeup remover"
+    },
+    "intent": "Show me products under $46.99 in \"makeup remover\" category",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "url_match"
+      ],
+      "reference_answers": null,
+      "reference_url": "__SHOPPING__/beauty-personal-care/makeup/makeup-remover.html?price=0-46.99",
+      "program_html": [],
+      "url_note": "GOLD in PRED"
+    },
+    "intent_template_id": 139
+  },
+  {
+    "sites": [
+      "shopping"
+    ],
+    "task_id": 517,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_state.json",
+    "start_url": "__SHOPPING__/skinit-decal-gaming-skin-compatible-with-xbox-one-s-console-and-controller-bundle-officially-licensed-nfl-baltimore-ravens-design.html",
+    "geolocation": null,
+    "intent_template": "Add this product to my wishlist",
+    "instantiation_dict": {},
+    "intent": "Add this product to my wishlist",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "program_html"
+      ],
+      "reference_answers": null,
+      "reference_url": "",
+      "program_html": [
+        {
+          "url": "__SHOPPING__/wishlist/",
+          "locator": "document.querySelector('.products-grid.wishlist').outerText",
+          "required_contents": {
+            "must_include": [
+              "Skinit Decal Gaming Skin Compatible with Xbox One S Console and Controller Bundle - Officially Licensed NFL Baltimore Ravens Design"
+            ]
+          }
+        }
+      ]
+    },
+    "intent_template_id": 196
+  },
+  {
+    "sites": [
+      "shopping"
+    ],
+    "task_id": 653,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_state.json",
+    "start_url": "__SHOPPING__",
+    "geolocation": null,
+    "intent_template": "Fill the \"contact us\" form in the site for a refund on the {{product}} I bought, stating that it broke after just three days of use. Also, ensure to include the order number #{{order_id}} and the product SKU. Don't submit yet, I will check.",
+    "instantiation_dict": {
+      "product": "phone screen protector",
+      "order_id": "000000180"
+    },
+    "intent": "Fill the \"contact us\" form in the site for a refund on the phone screen protector I bought, stating that it broke after just three days of use. Also, ensure to include the order number #000000180 and the product SKU. Don't submit yet, I will check.",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "url_match",
+        "program_html"
+      ],
+      "reference_answers": null,
+      "reference_url": "__SHOPPING__/contact",
+      "program_html": [
+        {
+          "url": "last",
+          "locator": "document.querySelector('[title=\"What’s on your mind?\"').value",
+          "required_contents": {
+            "must_include": [
+              "refund",
+              "it broke after three days of use",
+              "000000180",
+              "B087QJN9W1"
+            ]
+          }
+        }
+      ],
+      "url_note": "GOLD in PRED"
+    },
+    "intent_template_id": 153
+  },
+  {
+    "sites": [
+      "gitlab"
+    ],
+    "task_id": 662,
+    "require_login": true,
+    "storage_state": "./.auth/gitlab_state.json",
+    "start_url": "__GITLAB__",
+    "geolocation": null,
+    "intent_template": "Open an issue to {{issue}} in {{repo}}.",
+    "instantiation_dict": {
+      "repo": "aem-hacker",
+      "issue": "report experiencing \"OSError: [Errno 98] Address already in use\" during executions"
+    },
+    "intent": "Open an issue to report experiencing \"OSError: [Errno 98] Address already in use\" during executions in aem-hacker.",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "url_match",
+        "program_html"
+      ],
+      "reference_answers": null,
+      "reference_url": "__GITLAB__/0ang3el/aem-hacker/-/issues",
+      "program_html": [
+        {
+          "url": "last",
+          "locator": "document.querySelector('.detail-page-description').outerText",
+          "required_contents": {
+            "must_include": [
+              "OSError: [Errno 98] Address already in use"
+            ]
+          }
+        }
+      ],
+      "url_note": "GOLD in PRED"
+    },
+    "intent_template_id": 328
+  },
+  {
+    "sites": [
+      "shopping_admin"
+    ],
+    "task_id": 678,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_admin_state.json",
+    "start_url": "__SHOPPING_ADMIN__",
+    "geolocation": null,
+    "intent_template": "Lookup orders that are {{status}}",
+    "instantiation_dict": {
+      "status": "canceled"
+    },
+    "intent": "Lookup orders that are canceled",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "url_match",
+        "program_html"
+      ],
+      "reference_answers": null,
+      "reference_url": "__SHOPPING_ADMIN__/sales/order/",
+      "program_html": [
+        {
+          "url": "last",
+          "locator": "document.querySelector(\"div.admin__data-grid-filters-current\").outerText",
+          "required_contents": {
+            "must_include": [
+              "Canceled"
+            ]
+          }
+        }
+      ],
+      "url_note": "GOLD in PRED"
+    },
+    "intent_template_id": 253
+  },
+  {
+    "sites": [
+      "shopping_admin"
+    ],
+    "task_id": 696,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_admin_state.json",
+    "start_url": "__SHOPPING_ADMIN__",
+    "geolocation": null,
+    "intent_template": "Add a simple product named {{product}} with {{stock}} in stock, available in size {{size}} and color {{color}}, priced at ${{price}}",
+    "instantiation_dict": {
+      "product": "FancyBoy Man Causal Jeans",
+      "stock": "42",
+      "size": "34",
+      "color": "Blue",
+      "price": "169.99"
+    },
+    "intent": "Add a simple product named FancyBoy Man Causal Jeans with 42 in stock, available in size 34 and color Blue, priced at $169.99",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "url_match",
+        "program_html"
+      ],
+      "reference_answers": null,
+      "reference_url": "__SHOPPING_ADMIN__/catalog/product",
+      "program_html": [
+        {
+          "url": "last",
+          "locator": "document.querySelector('[name=\"product[name]\"').value",
+          "required_contents": {
+            "must_include": [
+              "FancyBoy Man Causal Jeans"
+            ]
+          }
+        },
+        {
+          "url": "last",
+          "locator": "document.querySelector('[name=\"product[quantity_and_stock_status][qty]\"').value",
+          "required_contents": {
+            "exact_match": "42"
+          }
+        },
+        {
+          "url": "last",
+          "locator": "document.querySelector('[name=\"product[price]\"').value",
+          "required_contents": {
+            "exact_match": "169.99"
+          }
+        },
+        {
+          "url": "last",
+          "locator": "document.querySelector('[data-role=\"selected-option\"').outerText",
+          "required_contents": {
+            "must_include": [
+              "bottom"
+            ]
+          }
+        },
+        {
+          "url": "last",
+          "locator": "document.querySelector('[name=\"product[size]\"').value",
+          "required_contents": {
+            "exact_match": "177"
+          }
+        },
+        {
+          "url": "last",
+          "locator": "document.querySelector('[name=\"product[color]\"').value",
+          "required_contents": {
+            "exact_match": "50"
+          }
+        },
+        {
+          "url": "last",
+          "locator": "document.querySelector('[data-index=\"category_ids\"').outerText",
+          "required_contents": {
+            "must_include": [
+              "bottoms"
+            ]
+          }
+        }
+      ],
+      "url_note": "GOLD in PRED"
+    },
+    "intent_template_id": 256
+  },
+  {
+    "sites": [
+      "shopping_admin"
+    ],
+    "task_id": 777,
+    "require_login": true,
+    "storage_state": "./.auth/shopping_admin_state.json",
+    "start_url": "__SHOPPING_ADMIN__",
+    "geolocation": null,
+    "intent_template": "{{action}} the price of {{config}} by {{amount}}",
+    "instantiation_dict": {
+      "amount": "$5",
+      "action": "Reduce",
+      "config": "green Hollister backyard sweater in all size"
+    },
+    "intent": "Reduce the price of green Hollister backyard sweater in all size by $5",
+    "require_reset": false,
+    "eval": {
+      "eval_types": [
+        "program_html"
+      ],
+      "reference_answers": null,
+      "reference_url": "",
+      "program_html": [
+        {
+          "url": "__SHOPPING_ADMIN__/catalog/product/edit/id/120/",
+          "locator": "document.querySelector('[name=\"product[price]\"').value",
+          "required_contents": {
+            "exact_match": "47.00"
+          }
+        },
+        {
+          "url": "__SHOPPING_ADMIN__/catalog/product/edit/id/117/",
+          "locator": "document.querySelector('[name=\"product[price]\"').value",
+          "required_contents": {
+            "exact_match": "47.00"
+          }
+        },
+        {
+          "url": "__SHOPPING_ADMIN__/catalog/product/edit/id/114/",
+          "locator": "document.querySelector('[name=\"product[price]\"').value",
+          "required_contents": {
+            "exact_match": "47.00"
+          }
+        },
+        {
+          "url": "__SHOPPING_ADMIN__/catalog/product/edit/id/111/",
+          "locator": "document.querySelector('[name=\"product[price]\"').value",
+          "required_contents": {
+            "exact_match": "47.00"
+          }
+        },
+        {
+          "url": "__SHOPPING_ADMIN__/catalog/product/edit/id/123/",
+          "locator": "document.querySelector('[name=\"product[price]\"').value",
+          "required_contents": {
+            "exact_match": "47.00"
+          }
+        }
+      ]
+    },
+    "intent_template_id": 742
+  }
+]

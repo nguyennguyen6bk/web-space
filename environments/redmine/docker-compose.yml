@@ -1,0 +1,34 @@
+version: '3.1'
+
+services:
+  redmine:
+    image: nguyen0710/redmine_app_hub:latest
+    container_name: redmine_app_prod
+    restart: always
+    ports:
+      - "8089:3000"
+    environment:
+      REDMINE_DB_MYSQL: ${REDMINE_DB_MYSQL}
+      REDMINE_DB_DATABASE: ${REDMINE_DB_DATABASE}
+      REDMINE_DB_USERNAME: ${REDMINE_DB_USERNAME}
+      REDMINE_DB_PASSWORD: ${REDMINE_DB_PASSWORD}
+      REDMINE_SECRET_KEY_BASE: ${REDMINE_SECRET_KEY_BASE}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: nguyen0710/redmine_mysql_prod:latest
+    container_name: redmine_mysql_prod
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 3
+      timeout: 10s
+      start_period: 20s
