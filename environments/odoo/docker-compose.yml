@@ -1,0 +1,28 @@
+services:
+  db:
+    image: nguyen0710/odoo_postgres_prod:latest
+    container_name: odoo_db_prod
+    environment:
+      - POSTGRES_DB=odoo
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "odoo"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    image: nguyen0710/odoo_web_prod:latest
+    container_name: odoo_web_prod
+    depends_on:
+      db:
+        condition: service_healthy
+
+    ports:
+      - "8070:8069"
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+      - DB_NAME=odoo

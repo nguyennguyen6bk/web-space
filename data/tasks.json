@@ -979,5 +979,887 @@
                 "description": ""
             }
         }
+    },
+    {
+        "task_id": "53",
+        "task_description": "Create a new quotation for customer \"Abigail Peterson\" with 1 unit of the product \"Cheese Burger\"",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web#action=485&model=sale.order&view_type=list&cids=1&menu_id=305",
+                "dom_extractor": "document.querySelector('tbody.ui-sortable tr.o_data_row div[name=\"amount_total\"]').innerText",
+                "match_type": "exact",
+                "match_value": "$ 8.05",
+                "description": "Verify the total amount displayed in the 'amount_total' column of the data table."
+            }
+        }
+    },
+    {
+        "task_id": "54",
+        "task_description": "Convert quotation \"S00003\" to a confirmed sales order.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web#id=28&menu_id=307&action=485&model=sale.order&view_type=form",
+                "dom_extractor": "Array.from(document.querySelectorAll('button[role=\"radio\"]')).find(btn => btn.textContent.trim() === 'Sales Order')?.getAttribute('aria-checked') === 'true'",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that the 'Sales Order' radio button is selected (aria-checked is true)."
+            }
+        }
+    },
+    {
+        "task_id": "55",
+        "task_description": "Create a new product named 'Pizza Pineapple' and set its sale price to 10 dollars.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web#action=498&model=product.template&view_type=kanban&menu_id=315",
+                "dom_extractor": "Array.from(document.querySelectorAll('.oe_kanban_details')).find(c => c.querySelector('.o_kanban_record_title span')?.textContent.trim() === 'Pizza Pineapple')?.querySelector('[name=\"list_price\"] span')?.textContent.trim()",
+                "match_type": "exact",
+                "match_value": "10",
+                "description": "Verify that the product 'Pizza Pineapple' has a list price of 10 in the kanban view."
+            }
+        }
+    },
+    {
+        "task_id": "56",
+        "task_description": "Create a new restaurant floor layout named 'Ground Floor' for Restaurant",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/pos/ui?config_id=2#cids=1",
+                "dom_extractor": "!!Array.from(document.querySelectorAll('.floor-selector button')).find(btn => btn.textContent.trim() === 'Main Floor')",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that the 'Main Floor' button exists in the floor selector."
+            }
+        }
+    },
+    {
+        "task_id": "57",
+        "task_description": "Add a new table named 'Table 5' to floor 'Second Floor' of NYC Shop",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#id=5&cids=1&menu_id=251&action=408&model=restaurant.floor&view_type=form",
+                "dom_extractor": "[...document.querySelectorAll('tbody.ui-sortable tr.o_data_row')].some(tr => tr.querySelector('td[name=\"name\"]')?.innerText.includes('Table 5'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Check if there is a row in the table containing the text 'Table 5' in the 'name' column."
+            }
+        }
+    },
+    {
+        "task_id": "58",
+        "task_description": "Create a Point of Sale named 'Purple Shop'",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=395&model=pos.config&view_type=list&cids=1&menu_id=243",
+                "dom_extractor": "!!Array.from(document.querySelectorAll('tbody.ui-sortable tr')).find(tr => tr.querySelector('td[name=\"name\"]')?.textContent.trim() === 'Purple Shop')",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that a row with the exact text 'Purple Shop' exists in the 'name' column of the table."
+            }
+        }
+    },
+    {
+        "task_id": "59",
+        "task_description": "Start a new Point of Sale session for \"New Shop\"",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=394&model=pos.config&view_type=kanban&cids=1&menu_id=223",
+                "dom_extractor": "!!Array.from(document.querySelectorAll('.o_kanban_record')).find(card => card.textContent.includes('NYC Shop') && card.querySelector('button')?.textContent.trim() === 'Continue Selling')",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that the kanban card for 'NYC Shop' contains a button labeled 'Continue Selling'."
+            }
+        }
+    },
+    {
+        "task_id": "60",
+        "task_description": "Close the current PoS session for 'NM Shop', automatically validating any open or unpaid orders.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=394&model=pos.config&view_type=kanban&cids=1&menu_id=223",
+                "dom_extractor": "!!Array.from(document.querySelectorAll('.o_kanban_record')).find(card => card.textContent.includes('NM Shop') && card.querySelector('button')?.textContent.trim() === 'New Session')",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that the kanban card for 'NM Shop' contains a button labeled 'New Session'."
+            }
+        }
+    },
+    {
+        "task_id": "61",
+        "task_description": "Split the bill for \"Table 3\" in the Main Floor of the \"Restaurant\" by moving the item 'Cheese Burger' to a separate bill.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=380&model=pos.order&view_type=list&cids=1&menu_id=231",
+                "dom_extractor": "document.querySelector('tr.o_data_row td[name=\"amount_total\"] span')?.innerText",
+                "match_type": "exact",
+                "match_value": "$ 8.05",
+                "description": "Verify that the total amount in the first order row is '$ 8.05'."
+            }
+        }
+    },
+    {
+        "task_id": "62",
+        "task_description": "Create a new lead for customer with email \"account.test.2@mynes.com\" interested in 'Website Design Services'.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=445&model=crm.lead&view_type=list&cids=1&menu_id=284",
+                "dom_extractor": "!!Array.from(document.querySelectorAll('tr.o_data_row')).find(tr => tr.querySelector('td[name=\"email_from\"]')?.textContent.trim().includes('account.test.2@mynes.com') && tr.querySelector('td[name=\"name\"]')?.textContent.trim().includes('Web design'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that a CRM lead exists with email containing 'account.test.2@mynes.com' and title containing 'Web design'."
+            }
+        }
+    },
+    {
+        "task_id": "63",
+        "task_description": "Assign a salesperson \"Marc Demo\" to a lead \"Website Development\"",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=445&model=crm.lead&view_type=list&cids=1&menu_id=284",
+                "dom_extractor": "Array.from(document.querySelectorAll('tr.o_data_row')).find(tr => tr.querySelector('td[name=\"name\"]')?.textContent.trim() === 'Website Development')?.querySelector('td[name=\"user_id\"]')?.textContent.trim()",
+                "match_type": "exact",
+                "match_value": "Marc Demo",
+                "description": "Verify that the lead named 'Web design' is assigned to the user 'Marc Demo'."
+            }
+        }
+    },
+    {
+        "task_id": "64",
+        "task_description": "Create a regular invoice from the sales order with reference number S00021.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=484&model=sale.order&view_type=list&cids=1&menu_id=308",
+                "dom_extractor": "Array.from(document.querySelectorAll('tr.o_data_row')).find(tr => tr.querySelector('td[name=\"name\"]')?.textContent.trim() === 'S00021')?.querySelector('td[name=\"invoice_status\"]').textContent.trim()",
+                "match_type": "exact",
+                "match_value": "Fully Invoiced",
+                "description": "Verify that the sale order 'S00021' has invoice status 'Fully Invoiced'."
+            }
+        }
+    },
+    {
+        "task_id": "65",
+        "task_description": "Register \"Cash Restaurant\" for invoice \"INV/2025/00005\"",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=243&model=account.move&view_type=list&cids=1&menu_id=113",
+                "dom_extractor": "Array.from(document.querySelectorAll('tr.o_data_row')).find(tr => tr.querySelector('td[name=\"name\"]')?.textContent.trim() === 'INV/2025/00005')?.querySelector('td[name=\"payment_state\"]').textContent.trim()",
+                "match_type": "exact",
+                "match_value": "Paid",
+                "description": "Verify that the invoice 'INV/2025/00005' has payment state 'Paid'."
+            }
+        }
+    },
+    {
+        "task_id": "66",
+        "task_description": "Create a new employee profile named \"Employee 1\" with the email \"account.test.5@mynes.com\".",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=515&model=hr.employee&view_type=kanban&cids=1&menu_id=346",
+                "dom_extractor": "Array.from(document.querySelectorAll('div.o_kanban_record')).find(card => card.textContent.includes('account.test.5@mynes.com'))?.querySelector('.o_kanban_record_title span')?.textContent.trim()",
+                "match_type": "exact",
+                "match_value": "Employee 1",
+                "description": "Verify that the employee card with email 'account.test.5@mynes.com' has the name 'Employee 1'."
+            }
+        }
+    },
+    {
+        "task_id": "67",
+        "task_description": "Update the employee named \"Employee 2\" by setting their Job Position to \"Web Developer\" using the Job Position placeholder field.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=515&model=hr.employee&view_type=kanban&cids=1&menu_id=343",
+                "dom_extractor": "Array.from(document.querySelectorAll('div.o_kanban_record')).find(card => card.textContent.includes('Employee 2'))?.querySelector('.o_kanban_record_subtitle span')?.textContent.trim()",
+                "match_type": "exact",
+                "match_value": "Web Developer",
+                "description": "Verify that the employee named 'Employee 2' has the job title 'Web Developer'."
+            }
+        }
+    },
+    {
+        "task_id": "68",
+        "task_description": "Create new job position \"QC Manager\"",
+        "task_type": NaN,
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=511&model=hr.job&view_type=list&cids=1&menu_id=359",
+                "dom_extractor": "[...document.querySelectorAll('tbody.ui-sortable tr.o_data_row')].some(tr => tr.querySelector('td[name=\"name\"]')?.innerText.includes('QC Manager'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that job position 'QC Manager' has been created by agent."
+            }
+        }
+    },
+    {
+        "task_id": "69",
+        "task_description": "Create new employment type \"Internship\"",
+        "task_type": NaN,
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=510&model=hr.contract.type&view_type=list&cids=1&menu_id=360",
+                "dom_extractor": "[...document.querySelectorAll('tbody.ui-sortable tr.o_data_row')].some(tr => tr.querySelector('td[name=\"name\"]')?.innerText.includes('Internship'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that the contract type list contains at least one entry with the name 'Internship'."
+            }
+        }
+    },
+    {
+        "task_id": "70",
+        "task_description": "Move \"Full-Time\" to the first position in the list of employment types.",
+        "task_type": NaN,
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=510&model=hr.contract.type&view_type=list&cids=1&menu_id=360",
+                "dom_extractor": "document.querySelector('tbody.ui-sortable tr.o_data_row td[name=\"name\"]').innerText",
+                "match_type": "exact",
+                "match_value": "Full-time",
+                "description": "Verify that the first contract type in the list is labeled 'Full-time'."
+            }
+        }
+    },
+    {
+        "task_id": "71",
+        "task_description": "Allocate 2 days of paid time off to employee Cherry Nguyen",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=542&model=hr.leave.allocation&view_type=list&cids=1&menu_id=372",
+                "dom_extractor": "[...document.querySelectorAll('tr.o_data_row')].find(tr => tr.querySelector('td[name=\"employee_id\"]')?.innerText.includes('Cherry Nguyen'))?.querySelector('td[name=\"duration_display\"]')?.innerText.trim()",
+                "match_type": "exact",
+                "match_value": "2 days",
+                "description": "Verify that the leave duration for employee 'Cherry Nguyen' is '2 days'."
+            }
+        }
+    },
+    {
+        "task_id": "72",
+        "task_description": "Retrieve the number of employees directly managed by Paul Williams.",
+        "task_type": NaN,
+        "start_url": NaN,
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "senmatic",
+                "match_value": "2 people"
+            }
+        }
+    },
+    {
+        "task_id": "73",
+        "task_description": "Create a new Time off type named 'Marriage Leave'.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=539&model=hr.leave.type&view_type=list&cids=1&menu_id=377",
+                "dom_extractor": "!![...document.querySelectorAll('td[name=\"display_name\"]')].find(td => td.innerText.includes('Marriage Leave'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that a leave type containing 'Marriage Leave' exists in the list."
+            }
+        }
+    },
+    {
+        "task_id": "74",
+        "task_description": "Approve all time off requests submitted by Anita Olivier.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=535&model=hr.leave&view_type=list&cids=1&menu_id=371",
+                "dom_extractor": "!![...document.querySelectorAll('td[name=\"all_employee_ids\"] .o_tag_badge_text')].find(el => el.textContent.trim().includes('Anita Oliver'))",
+                "match_type": "exact",
+                "match_value": false,
+                "description": "Verify that 'Anita Oliver' is no longer listed in the employee tags for leave records."
+            }
+        }
+    },
+    {
+        "task_id": "75",
+        "task_description": "Activate the Project module from the Apps menu",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=38&model=ir.module.module&view_type=list&cids=1&menu_id=15",
+                "dom_extractor": "Array.from(document.querySelectorAll('tr.o_data_row')).find(tr => tr.querySelector('td[name=\"shortdesc\"]')?.textContent.trim() === 'Project')?.querySelector('td[name=\"state\"]').innerText.trim()",
+                "match_type": "exact",
+                "match_value": "Installed",
+                "description": "Verify that the 'Project' module has the state 'Installed'."
+            }
+        }
+    },
+    {
+        "task_id": "76",
+        "task_description": "Change the email address of \"Alaska Company\" to email \"account.test.4@mynes.com\".",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?debug=#action=52&model=res.company&view_type=kanban&cids=1&menu_id=57",
+                "dom_extractor": "!![...document.querySelectorAll('.o_kanban_record')].find(div => div.innerText.includes('Alaska Company') && div.innerText.includes('account.test.4@mynes.com'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that the kanban card for 'Alaska Company' contains the email 'account.test.4@mynes.com'."
+            }
+        }
+    },
+    {
+        "task_id": "77",
+        "task_description": "Create a stock adjustment for product 'Pizza Starfruit' with quantity 200",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?debug=#action=498&model=product.template&view_type=list&cids=1&menu_id=315",
+                "dom_extractor": "Array.from(document.querySelectorAll('tr.o_data_row')).find(tr => tr.querySelector('td[name=\"name\"]')?.textContent.trim() === 'Pizza Starfruit')?.querySelector('td[name=\"qty_available\"]').textContent.trim()",
+                "match_type": "exact",
+                "match_value": "200.00",
+                "description": "Verify that the product 'Pizza Starfruit' has an available quantity of 200.00."
+            }
+        }
+    },
+    {
+        "task_id": "78",
+        "task_description": "Reorder the sales order S00006",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?debug=#action=484&model=sale.order&view_type=list&cids=1&menu_id=308",
+                "dom_extractor": "document.querySelector('tbody.ui-sortable tr.o_data_row td[name=\"amount_total\"]').innerText.trim()",
+                "match_type": "exact",
+                "match_value": "$ 862.50",
+                "description": "Verify that the total amount in the first sale order row is '$ 862.50'."
+            }
+        }
+    },
+    {
+        "task_id": "79",
+        "task_description": "Create a new warehouse location named 'Freezer Room'.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?debug=#action=329&model=stock.warehouse&view_type=list&cids=1&menu_id=196",
+                "dom_extractor": "[...document.querySelectorAll('tbody.ui-sortable tr.o_data_row')].some(tr => tr.querySelector('td[name=\"name\"]')?.innerText.includes('Freezer Room'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that a warehouse named 'Freezer Room' exists in the list."
+            }
+        }
+    },
+    {
+        "task_id": "80",
+        "task_description": "Cancel the quotation S00034",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?debug=#action=485&model=sale.order&view_type=list&cids=1&menu_id=307",
+                "dom_extractor": "Array.from(document.querySelectorAll('tr.o_data_row')).find(tr => tr.querySelector('td[name=\"name\"]')?.textContent.trim() === 'S00033')?.querySelector('td[name=\"state\"]').innerText.trim()",
+                "match_type": "exact",
+                "match_value": "Cancelled",
+                "description": "Verify that the sale order 'S00033' has a status of 'Cancelled'."
+            }
+        }
+    },
+    {
+        "task_id": "81",
+        "task_description": "Change the stage of opportunity 'AI Agent Development' to 'Won'.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?debug=#action=448&model=crm.lead&view_type=list&cids=1&menu_id=280",
+                "dom_extractor": "Array.from(document.querySelectorAll('tr.o_data_row')).find(tr => tr.querySelector('td[name=\"name\"]')?.textContent.trim() === 'AI Agent Development')?.querySelector('td[name=\"stage_id\"]').innerText.trim()",
+                "match_type": "exact",
+                "match_value": "Won",
+                "description": "Verify that the CRM opportunity 'AI Agent Development' is in the 'Won' stage."
+            }
+        }
+    },
+    {
+        "task_id": "82",
+        "task_description": "Terminate employee 'Employee 4' effective today.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?debug=#id=23&cids=1&menu_id=346&action=515&model=hr.employee&view_type=form",
+                "dom_extractor": "document.querySelector('.o_content span').innerText",
+                "match_type": "exact",
+                "match_value": "ARCHIVED",
+                "description": "Verify that the employee's status is shown as 'ARCHIVED' on the form view."
+            }
+        }
+    },
+    {
+        "task_id": "83",
+        "task_description": "Send a message to user \"Alice Lam\" with the content \"Please review the sales report.\"",
+        "task_type": "operation",
+        "start_url": "__CHAT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web#action=119&cids=1&menu_id=76&active_id=discuss.channel_6",
+                "dom_extractor": "[...document.querySelectorAll('div.o-mail-Message p')].pop().innerText.trim()",
+                "match_type": "exact",
+                "match_value": "Please review the sales report.",
+                "description": "Verify that the last message in the discussion channel is 'Please review the sales report.'."
+            }
+        }
+    },
+    {
+        "task_id": "84",
+        "task_description": "Start a new channel named \"Dev Team Chat\".",
+        "task_type": "operation",
+        "start_url": "__CHAT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=119&cids=1&menu_id=76",
+                "dom_extractor": "[...document.querySelectorAll('button.o-mail-DiscussSidebarChannel')].some(btn => btn.innerText.includes('Dev Team Chat'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that the sidebar contains a discussion channel named 'Dev Team Chat'."
+            }
+        }
+    },
+    {
+        "task_id": "85",
+        "task_description": "Add to channel  \"QC Team\" With members \"Alice Lam\" and \"Marc Demo\".",
+        "task_type": "operation",
+        "start_url": "__CHAT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=119&cids=1&menu_id=76&active_id=discuss.channel_7",
+                "dom_extractor": "[...document.querySelectorAll('.o_mail_notification')].map(div => div.innerText).some(t => t.includes('invited') && t.includes('Alice Lam')) && [...document.querySelectorAll('.o_mail_notification')].map(div => div.innerText).some(t => t.includes('invited') && t.includes('Marc Demo'))",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that both 'Khanh Nguyen' and 'Marc Demo' were invited to the discussion channel, based on notification messages."
+            }
+        }
+    },
+    {
+        "task_id": "86",
+        "task_description": "Send a message \"Standup at 9 AM\" in channel \"Company Portal\".",
+        "task_type": "operation",
+        "start_url": "__CHAT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web#action=119&cids=1&menu_id=76&active_id=discuss.channel_10",
+                "dom_extractor": "[...document.querySelectorAll('div.o-mail-Message p')].pop().innerText.trim()",
+                "match_type": "exact",
+                "match_value": "Standup at 9 AM",
+                "description": "Verify that the last message in the discussion channel is 'Standup at 9 AM'."
+            }
+        }
+    },
+    {
+        "task_id": "87",
+        "task_description": "React to the latest message in \"Compay Portal\" with a thumbs up emoji.",
+        "task_type": "operation",
+        "start_url": "__CHAT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web#action=119&cids=1&menu_id=76&active_id=discuss.channel_10",
+                "dom_extractor": "[...document.querySelectorAll('button.o-mail-MessageReaction')].at(-1)?.querySelector('span').innerText",
+                "match_type": "exact",
+                "match_value": "👍",
+                "description": "Verify that the last reaction in the message thread is a thumbs up (👍)."
+            }
+        }
+    },
+    {
+        "task_id": "88",
+        "task_description": "Mention user \"Marc Demo\" in a message inside channel \"Company Portal\".",
+        "task_type": "operation",
+        "start_url": "__CHAT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web#action=119&cids=1&menu_id=76&active_id=discuss.channel_10",
+                "dom_extractor": "[...document.querySelectorAll('div.o-mail-Message')].pop().innerText.includes('@Marc Demo')",
+                "match_type": "exact",
+                "match_value": true,
+                "description": "Verify that the most recent message in the discussion mentions '@Marc Demo'."
+            }
+        }
+    },
+    {
+        "task_id": "89",
+        "task_description": "Retrieve the Latest Pinned Message in \"Company Portal\" Channel",
+        "task_type": "operation",
+        "start_url": "__CHAT__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "senmatic",
+                "match_value": "Status meeting at 9:00 AM"
+            }
+        }
+    },
+    {
+        "task_id": "90",
+        "task_description": "what is status of reference S00002?",
+        "task_type": "lookup",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "Quotation"
+            }
+        }
+    },
+    {
+        "task_id": "91",
+        "task_description": "What is the untaxed total amount of sales order S00004?\n",
+        "task_type": "lookup",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "contains",
+                "match_value": "2,240.00"
+            }
+        }
+    },
+    {
+        "task_id": "92",
+        "task_description": "Retrieve the weight  of product \"Office Chair Black\"",
+        "task_type": "lookup",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "0.01"
+            }
+        }
+    },
+    {
+        "task_id": "93",
+        "task_description": "Retrieve the shipping policy of sales order S00004.",
+        "task_type": "lookup",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "contains",
+                "match_value": "As soon as possible"
+            }
+        }
+    },
+    {
+        "task_id": "94",
+        "task_description": "Retrieve the most recent school that Tina Williamson has attended",
+        "task_type": "lookup",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "contains",
+                "match_value": "Wycheproof P-12 College"
+            }
+        }
+    },
+    {
+        "task_id": "95",
+        "task_description": "Retrieve the work address of employee \"Randall Lewis\"",
+        "task_type": "lookup",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "senmatic",
+                "match_value": "250 Executive Park Blvd, Suite 3400, San Francisco CA 94134, United States"
+            }
+        }
+    },
+    {
+        "task_id": "96",
+        "task_description": "Retrieve the number of Parental leave days allocated to Ronnie Hart",
+        "task_type": "lookup",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "10"
+            }
+        }
+    },
+    {
+        "task_id": "97",
+        "task_description": "Convert the lead named \"Website Development\" into an opportunity and set the expected revenue to $50,000.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#action=448&model=crm.lead&view_type=list&cids=1&menu_id=280",
+                "dom_extractor": "[...document.querySelectorAll('tbody.ui-sortable tr.o_data_row')].find(row => row.querySelector('td[name=\"name\"]')?.textContent.trim() === \"Website Development\")?.querySelector('td[name=\"expected_revenue\"] span')?.textContent.trim()",
+                "match_type": "exact",
+                "match_value": "$ 50,000.00",
+                "description": "Verify that the expected revenue for the lead titled 'Website Development' is '$ 50,000.00'."
+            }
+        }
+    },
+    {
+        "task_id": "98",
+        "task_description": "Transfer 10 units of \"Office Chair Black\" from  POS/Shop to WH/Stock. ",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web#id=17&cids=1&menu_id=204&action=354&model=product.template&view_type=form",
+                "dom_extractor": "document.querySelector('[name=\"qty_available\"]').innerText",
+                "match_type": "contains",
+                "match_value": "25",
+                "description": ""
+            }
+        }
+    },
+    {
+        "task_id": "99",
+        "task_description": "Apply a 10% discount to the product \"Pizza Starfruit\" in the quotation \"S00028\", and retrieve the total amount after the discount is applied.",
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "contains",
+                "match_value": "13.51"
+            }
+        }
+    },
+    {
+        "task_id": "100",
+        "task_description": "Change the tags of the opportunity titled \"5 VP Chairs\" to \"Product\"",
+        "task_type": NaN,
+        "start_url": NaN,
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "dom_match"
+            ],
+            "dom_match": {
+                "url": "http://localhost:8070/web?reload=true#id=22&cids=1&menu_id=280&action=448&model=crm.lead&view_type=form",
+                "dom_extractor": "document.querySelector('[name=\"tag_ids\"]').innerText",
+                "match_type": "exact",
+                "match_value": "Product",
+                "description": ""
+            }
+        }
     }
 ]
