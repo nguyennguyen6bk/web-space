@@ -1268,7 +1268,7 @@
     {
         "task_id": "68",
         "task_description": "Create new job position \"QC Manager\"",
-        "task_type": NaN,
+        "task_type": "operation",
         "start_url": "__ERP__",
         "require_login": true,
         "eval": {
@@ -1287,7 +1287,7 @@
     {
         "task_id": "69",
         "task_description": "Create new employment type \"Internship\"",
-        "task_type": NaN,
+        "task_type": "operation",
         "start_url": "__ERP__",
         "require_login": true,
         "eval": {
@@ -1306,7 +1306,7 @@
     {
         "task_id": "70",
         "task_description": "Move \"Full-Time\" to the first position in the list of employment types.",
-        "task_type": NaN,
+        "task_type": "operation",
         "start_url": "__ERP__",
         "require_login": true,
         "eval": {
@@ -1344,9 +1344,9 @@
     {
         "task_id": "72",
         "task_description": "Retrieve the number of employees directly managed by Paul Williams.",
-        "task_type": NaN,
-        "start_url": NaN,
-        "require_login": false,
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
         "eval": {
             "eval_type": [
                 "string_match"
@@ -1846,9 +1846,9 @@
     {
         "task_id": "100",
         "task_description": "Change the tags of the opportunity titled \"5 VP Chairs\" to \"Product\"",
-        "task_type": NaN,
-        "start_url": NaN,
-        "require_login": false,
+        "task_type": "operation",
+        "start_url": "__ERP__",
+        "require_login": true,
         "eval": {
             "eval_type": [
                 "dom_match"
