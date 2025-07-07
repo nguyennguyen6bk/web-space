@@ -1,0 +1,28 @@
+1. Magento (Ecommerce)
+- Magento storefront : http://localhost:8084
+- Magento Admin : http://localhost:8084/admin_1n47uy/ (admin/Admin@123)
+
+2. Redmine (Project management)
+- http://localhost:8089	admin / Admin123	
+
+3. Odoo (ERP)
+- http://localhost:8069 / Admin account : (nguyen.nguyen.6bk@gmail.com/Admin@123) / Master password : nz23-ijde-258u
+
+	
+
+
+
+------Pending------
+4.	Jorani	http://localhost:8085	bbalet/bbalet	Leave Management System
+4.	WordPress	http://localhost:8081		Blog		
+5.	Drupal	http://localhost:8082		Blog		
+6.	phpBB	http://localhost:8083		Forum		
+8.	The-Internet	http://localhost:8086				
+9.	EspoCRM	http://localhost:8087	admin / password	CRM	
+11.	qloapps	http://localhost:8090		Hotel booking App		
+12.		http://localhost:8090/admin0710	nguyen.nguyen.6bk@gmail.com / Admin123		
+
+
+
+	
+

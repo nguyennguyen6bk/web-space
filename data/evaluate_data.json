@@ -1,0 +1,91 @@
+[
+    {
+        "task_id": "t00",
+        "task_description": "Open Watches menu and retrieve the name of the first product in the list.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match",
+                "regex_match",
+                "url_match",
+                "dom_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "Aim Analog Watch"
+            },
+            "regex_match": {
+                "email": {
+                    "pattern": "^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$",
+                    "required": "true",
+                    "description": "A valid email address format (e.g., user@example.com)"
+                },
+                "password": {
+                    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+=\\-]{8,}$",
+                    "required": "true",
+                    "description": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, and one number"
+                }
+            },
+            "url_match": {
+                "url": "last",
+                "match_type": "contains",
+                "match_value": "customer/account"
+            },
+            "dom_match": {
+                "url": "http://localhost:8084/aim-analog-watch.html",
+                "dom_extractor": "document.querySelector('#old-price-36 .price').innerText;",
+                "match_type": "exact",
+                "match_value": "$45.00",
+                "description": "{{description}}"
+            }
+        }
+    },
+    {
+        "task_id": "t01",
+        "task_description": "Open all 'Jackets' menus and retrieve the name of the first product from each.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match",
+                "regex_match",
+                "url_match",
+                "dom_match"
+            ],
+            "string_match": {
+                "match_type": "contains",
+                "match_value": [
+                    "Beaumont Summit Kit",
+                    "Stellar Solar Jacket"
+                ]
+            },
+            "regex_match": {
+                "email": {
+                    "pattern": "^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$",
+                    "required": "true",
+                    "description": "A valid email address format (e.g., user@example.com)"
+                },
+                "password": {
+                    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+=\\-]{8,}$",
+                    "required": "true",
+                    "description": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, and one number"
+                }
+            },
+            "url_match": {
+                "url": "last",
+                "match_type": "contains",
+                "match_value": "customer/account"
+            },
+            "dom_match": {
+                "url": "http://localhost:8084/aim-analog-watch.html",
+                "dom_extractor": "document.querySelector('#old-price-36 .price').innerText;",
+                "match_type": "exact",
+                "match_value": "$45.00",
+                "description": "{{description}}"
+            }
+        }
+    }
+]
