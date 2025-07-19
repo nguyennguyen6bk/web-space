@@ -13,7 +13,7 @@ def test_string_match_exact():
     eva = Evaluator(tasks)
 
     task_id = "t08";
-    agent_result = "BeaBeaumont Summit Kit clothing"
+    agent_result = "Beaumont Summit Kit clothing"
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--start-maximized")  # Mở trình duyệt ở chế độ full screen window

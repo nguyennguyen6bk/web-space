@@ -1,3 +1,5 @@
+import ast
+import json
 from selenium.webdriver.remote.webdriver import WebDriver
 from playwright.async_api import Page
 from evaluate.handlers import *
@@ -75,11 +77,13 @@ class Evaluator:
                 print(f"Evaluating {eval_type} with Playwright...")
                 if not await dom_match_playwright(target_conf=eval_block[eval_type], browser=browser):
                     return False
+                result = True
                 # Handle DOM matching with Playwright
             elif eval_type == 'url_match':
                 print(f"Evaluating {eval_type} with Playwright...")
                 if not await url_match_playwright(target_conf=eval_block[eval_type], browser=browser):
                     return False
+                result = True
                 # Handle URL matching with Playwright       
             elif eval_type == 'string_match':
                 print(f"Evaluating {eval_type}...")

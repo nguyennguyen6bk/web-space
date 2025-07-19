@@ -80,7 +80,9 @@ def dom_match_logic(agent_result, target_conf):
         return exact(agent_result, match_value)
 
     elif match_type == 'contains':
-        return check_contains(agent_result, match_value)
+        temp = check_contains(agent_result, match_value)
+        print(f"[dom_match] Contains check: {temp}")
+        return temp
     else:
         print(f"Unknown match_type: {match_type}")
         return False
@@ -108,9 +110,19 @@ async def dom_match_playwright(target_conf, browser: Page):
         print("[dom_match] Using current page context.")
     else:
         print(f"[dom_match] Expected agent to visit URL: {url}")
-    await browser.goto(url)
+        await browser.goto(url)
+        
+    await browser.wait_for_timeout(5000)
+    agent_result = None
+    max_retry = 20
+    retry_count = 0
 
-    agent_result = await browser.evaluate(js_script)
+    while agent_result is None and retry_count < max_retry:
+        agent_result = await browser.evaluate(js_script)
+        if agent_result is None:
+            await asyncio.sleep(1)  # đợi 1 giây giữa mỗi lần thử
+            retry_count += 1
+
     return dom_match_logic(agent_result, target_conf)
 
 

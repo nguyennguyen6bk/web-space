@@ -1,3 +1,6 @@
 # git ignore
 /backup
 /.idea
+/logs
+/.vscode
+.env

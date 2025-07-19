@@ -1,7 +1,7 @@
 [
     {
         "task_id": "1",
-        "task_description": "Retrieve the name of the first product listed in the \"Watches\" category",
+        "task_description": "Retrieve the name of the first product listed in the \"Gear > Watches\" category",
         "task_type": "lookup",
         "start_url": "__SHOPPING__",
         "require_login": false,
@@ -17,15 +17,15 @@
     },
     {
         "task_id": "2",
-        "task_description": "Open all 'Jackets' menus and retrieve the name of the first product from each.",
+        "task_description": "Open all 'Jackets' sub-menus and extract the name of the first product from each sub-menu. Return only the product names in a list format.",
         "task_type": "lookup",
         "start_url": "__SHOPPING__",
         "require_login": false,
         "eval": {
             "eval_type": [
-                "string_match"
+                "multiset_match"
             ],
-            "string_match": {
+            "multiset_match": {
                 "match_type": "contains",
                 "match_value": [
                     "Beaumont Summit Kit",
@@ -36,7 +36,7 @@
     },
     {
         "task_id": "3",
-        "task_description": "Open the \"Pants\" category under \"Women\", then retrieve the name of the 13th product in the list.",
+        "task_description": "Navigate to Women > Pants. Return only the name of the 13th product.",
         "task_type": "lookup",
         "start_url": "__SHOPPING__",
         "require_login": false,
@@ -52,7 +52,7 @@
     },
     {
         "task_id": "4",
-        "task_description": "Ensure the cart is empty. Then purchase 3 units of the product named \"Push It Messenger Bag\" using the cheapest available shipping method. What is the total order amount?",
+        "task_description": "Empty the cart. Purchase 3 units of 'Push It Messenger Bag' using the cheapest shipping method. Return only the Order Total.",
         "task_type": "operation",
         "start_url": "__SHOPPING__",
         "require_login": true,
@@ -100,18 +100,22 @@
     },
     {
         "task_id": "6",
-        "task_description": "Add a product named 'Push It Messenger Bag' to cart and what is the url of shopping cart page ?",
+        "task_description": "Add the product 'Push It Messenger Bag' to the cart and return only the URL of the shopping cart page.",
         "task_type": "operation",
         "start_url": "__SHOPPING__",
         "require_login": false,
         "eval": {
             "eval_type": [
+                "string_match",
                 "url_match"
             ],
-            "url_match": {
-                "url": "last",
+            "string_match": {
                 "match_type": "contains",
-                "match_value": "customer/account"
+                "match_value": "checkout/cart"
+            },
+            "url_match": {
+                "match_type": "contains",
+                "match_value": "checkout/cart"
             }
         }
     },
@@ -127,7 +131,7 @@
             ],
             "dom_match": {
                 "url": "last",
-                "dom_extractor": "document.querySelector('.message-success.success.message > div').innerText'",
+                "dom_extractor": "document.querySelector('.message-success.success.message > div').innerText",
                 "match_type": "contains",
                 "match_value": "Thank you for your subscription.",
                 "description": "Verify that the success message 'Thank you for your subscription.' is displayed after subscribing."
@@ -146,7 +150,7 @@
             ],
             "regex_match": {
                 "order_number": {
-                    "pattern": "^0000\\d{4}$",
+                    "pattern": "^0000\\d{5}$",
                     "required": true,
                     "description": ""
                 }
@@ -165,7 +169,7 @@
             ],
             "regex_match": {
                 "order_number": {
-                    "pattern": "^0000\\d{4}$",
+                    "pattern": "^0000\\d{5}$",
                     "required": true,
                     "description": ""
                 }
@@ -174,7 +178,7 @@
     },
     {
         "task_id": "10",
-        "task_description": "Empty wishlist pasge and then save \"Josie Yoga Jacket\" to wishlist and verify it appears in the wishlist page.",
+        "task_description": "Empty wishlist page and then save the product \"Josie Yoga Jacket\" to wishlist.",
         "task_type": "operation",
         "start_url": "__SHOPPING__",
         "require_login": true,
@@ -193,7 +197,7 @@
     },
     {
         "task_id": "11",
-        "task_description": "Place an order for the product 'Hyperion Elements Jacket - XL - Red' for the user with the email address \"account.test.2@mynes.com\".",
+        "task_description": "Place an order for the product 'Hyperion Elements Jacket - XL - Red' on behalf of the user with the email address 'account.test.2@mynes.com'.",
         "task_type": "operation",
         "start_url": "__SHOPPING_ADMIN__",
         "require_login": true,
@@ -212,7 +216,7 @@
     },
     {
         "task_id": "12",
-        "task_description": "Retrieve the latest comment of order #000000003.",
+        "task_description": "Retrieve the latest comment for order #000000003. Return only the comment text - no explanation, no prefix.",
         "task_type": "lookup",
         "start_url": "__SHOPPING_ADMIN__",
         "require_login": true,
@@ -228,7 +232,7 @@
     },
     {
         "task_id": "13",
-        "task_description": "Retrieve the tracking number of order #000000004",
+        "task_description": "Retrieve the tracking number of order #000000004. Return only the  tracking number - no explanation, no prefix.",
         "task_type": "lookup",
         "start_url": "__SHOPPING_ADMIN__",
         "require_login": true,
@@ -244,10 +248,10 @@
     },
     {
         "task_id": "14",
-        "task_description": "what is the Subtotal after applying the coupon code 'save5percent' to product \"Erika Running Short\" size:32 color:Red\"?",
+        "task_description": "Using coupon code 'save5percent', purchase 'Erika Running Short' in size 32 and color Red. Return only the final Order Total.",
         "task_type": "operation",
-        "start_url": "__SHOPPING_ADMIN__",
-        "require_login": true,
+        "start_url": "__SHOPPING__",
+        "require_login": false,
         "eval": {
             "eval_type": [
                 "string_match"
@@ -286,7 +290,7 @@
             ],
             "dom_match": {
                 "url": "http://localhost:8084/bag-hand-made.html",
-                "dom_extractor": "document.querySelector('#product-price-2041 .price').innerText",
+                "dom_extractor": "document.querySelector('span[data-price-type=\"finalPrice\"]').innerText",
                 "match_type": "exact",
                 "match_value": "$30.00",
                 "description": ""
@@ -314,7 +318,7 @@
     },
     {
         "task_id": "18",
-        "task_description": "Count how many items are listed on the second page of the “Pants” subcategory under the “Women” category.",
+        "task_description": "How many items are displayed on page 2 of the “Pants” subcategory under the “Women” category. Return just the number. ",
         "task_type": "Lookup",
         "start_url": "__SHOPPING__",
         "require_login": false,
@@ -324,13 +328,13 @@
             ],
             "string_match": {
                 "match_type": "exact",
-                "match_value": "2"
+                "match_value": "1"
             }
         }
     },
     {
         "task_id": "19",
-        "task_description": "Disable a product \"Compete Track Tote\" and verify storefront visibility.",
+        "task_description": "Disable the product 'Compete Track Tote'.",
         "task_type": "operation",
         "start_url": "__SHOPPING_ADMIN__",
         "require_login": true,
@@ -349,7 +353,7 @@
     },
     {
         "task_id": "20",
-        "task_description": "Enable \"Voyage Yoga Bag\" and verify storefront visibility.",
+        "task_description": "Enable the product 'Voyage Yoga Bag'.",
         "task_type": "operation",
         "start_url": "__SHOPPING_ADMIN__",
         "require_login": true,
@@ -368,7 +372,7 @@
     },
     {
         "task_id": "21",
-        "task_description": "Modify Content Heading of About US page to \"About Our Company\" and verify on the About Us page.",
+        "task_description": "Modify content heading of About US page to 'About Our Company'",
         "task_type": "operation",
         "start_url": "__SHOPPING_ADMIN__",
         "require_login": true,
@@ -387,7 +391,7 @@
     },
     {
         "task_id": "22",
-        "task_description": "Compare two products \"Rival Field Messenger\" and \"Fusion Backpack\", then verify the comparison table.",
+        "task_description": "Compare two products 'Rival Field Messenger' and 'Fusion Backpack'",
         "task_type": "operation",
         "start_url": "__SHOPPING__",
         "require_login": false,
@@ -425,7 +429,7 @@
     },
     {
         "task_id": "24",
-        "task_description": "Perform partial refund using default values for product \"Josie Yoga Jacket (Size XL, Gray)\" in Order \"000000010\" .",
+        "task_description": "Perform partial refund using default values for product 'Josie Yoga Jacket (Size XL, Gray)' in Order '000000010' .",
         "task_type": "operation",
         "start_url": "__SHOPPING_ADMIN__",
         "require_login": true,
@@ -444,7 +448,7 @@
     },
     {
         "task_id": "25",
-        "task_description": "Reorder the Most Recent Order of Customer \"Veronica Costello\" and return Total Paid.",
+        "task_description": "Reorder the Most Recent Order of Customer 'Veronica Costello' and return Grand Total.",
         "task_type": "operation",
         "start_url": "__SHOPPING_ADMIN__",
         "require_login": true,
@@ -468,7 +472,7 @@
     },
     {
         "task_id": "26",
-        "task_description": "Reorder the most recent customer order from the storefront.",
+        "task_description": "Reorder the very first order associated with my account.",
         "task_type": "operation",
         "start_url": "__SHOPPING__",
         "require_login": true,
@@ -487,7 +491,7 @@
     },
     {
         "task_id": "27",
-        "task_description": "Update CMS Page Content.\nChange the page heading from \"Luma Delivery and Returns\" to \"Luna Service Team\" and check it on storefront",
+        "task_description": "Update the heading on the Customer Service CMS page from 'Luma Delivery and Returns' to 'Luna Service Team'.",
         "task_type": "operation",
         "start_url": "__SHOPPING_ADMIN__",
         "require_login": true,
@@ -506,7 +510,7 @@
     },
     {
         "task_id": "28",
-        "task_description": "Create a CMS page \"'Store Location'\" and check its visibility on the frontend.",
+        "task_description": "Create a new CMS page 'Store Location'",
         "task_type": "operation",
         "start_url": "__SHOPPING_ADMIN__",
         "require_login": true,
@@ -544,7 +548,7 @@
     },
     {
         "task_id": "30",
-        "task_description": "Retrieve the current rating in percent of the product named 'Fusion Backpack'.",
+        "task_description": "Retrieve the current rating (in percent) of the product named 'Fusion Backpack'. Return only the percentage.",
         "task_type": "operation",
         "start_url": "__SHOPPING__",
         "require_login": false,
@@ -636,7 +640,7 @@
     },
     {
         "task_id": "35",
-        "task_description": "Close Demo App project",
+        "task_description": "To close Demo App project.",
         "task_type": "operation",
         "start_url": "__PROJECT__",
         "require_login": true,
@@ -655,10 +659,10 @@
     },
     {
         "task_id": "36",
-        "task_description": "Create new users (with appropriate permissions)",
+        "task_description": "Create a new user.",
         "task_type": "form",
         "start_url": "__PROJECT__",
-        "require_login": true,
+        "require_login": false,
         "eval": {
             "eval_type": [
                 "dom_match"
@@ -1010,7 +1014,7 @@
                 "dom_match"
             ],
             "dom_match": {
-                "url": "http://localhost:8070/web#id=28&menu_id=307&action=485&model=sale.order&view_type=form",
+                "url": "http://localhost:8070/web#id=3&menu_id=305&action=485&model=sale.order&view_type=form",
                 "dom_extractor": "Array.from(document.querySelectorAll('button[role=\"radio\"]')).find(btn => btn.textContent.trim() === 'Sales Order')?.getAttribute('aria-checked') === 'true'",
                 "match_type": "exact",
                 "match_value": true,
@@ -1032,7 +1036,7 @@
                 "url": "http://localhost:8070/web#action=498&model=product.template&view_type=kanban&menu_id=315",
                 "dom_extractor": "Array.from(document.querySelectorAll('.oe_kanban_details')).find(c => c.querySelector('.o_kanban_record_title span')?.textContent.trim() === 'Pizza Pineapple')?.querySelector('[name=\"list_price\"] span')?.textContent.trim()",
                 "match_type": "exact",
-                "match_value": "10",
+                "match_value": "$ 10.00",
                 "description": "Verify that the product 'Pizza Pineapple' has a list price of 10 in the kanban view."
             }
         }
@@ -1324,7 +1328,7 @@
     },
     {
         "task_id": "71",
-        "task_description": "Allocate 2 days of paid time off to employee Cherry Nguyen",
+        "task_description": "Allocate 2 days of Paid Time Off exclusively to Cherry Nguyen.",
         "task_type": "operation",
         "start_url": "__ERP__",
         "require_login": true,
@@ -1334,7 +1338,7 @@
             ],
             "dom_match": {
                 "url": "http://localhost:8070/web?reload=true#action=542&model=hr.leave.allocation&view_type=list&cids=1&menu_id=372",
-                "dom_extractor": "[...document.querySelectorAll('tr.o_data_row')].find(tr => tr.querySelector('td[name=\"employee_id\"]')?.innerText.includes('Cherry Nguyen'))?.querySelector('td[name=\"duration_display\"]')?.innerText.trim()",
+                "dom_extractor": "document.querySelector('tr.o_data_row')?.querySelector('td[name=\"employee_id\"]')?.innerText.includes('Cherry Nguyen') ? document.querySelector('tr.o_data_row')?.querySelector('td[name=\"duration_display\"]')?.innerText.trim() : null",
                 "match_type": "exact",
                 "match_value": "2 days",
                 "description": "Verify that the leave duration for employee 'Cherry Nguyen' is '2 days'."
@@ -1551,7 +1555,7 @@
         "task_id": "83",
         "task_description": "Send a message to user \"Alice Lam\" with the content \"Please review the sales report.\"",
         "task_type": "operation",
-        "start_url": "__CHAT__",
+        "start_url": "__ERP__",
         "require_login": true,
         "eval": {
             "eval_type": [
@@ -1570,7 +1574,7 @@
         "task_id": "84",
         "task_description": "Start a new channel named \"Dev Team Chat\".",
         "task_type": "operation",
-        "start_url": "__CHAT__",
+        "start_url": "__ERP__",
         "require_login": true,
         "eval": {
             "eval_type": [
@@ -1587,9 +1591,9 @@
     },
     {
         "task_id": "85",
-        "task_description": "Add to channel  \"QC Team\" With members \"Alice Lam\" and \"Marc Demo\".",
+        "task_description": "Add Alice Lam and Marc Demo to an existing channel called ‘QC Team’.",
         "task_type": "operation",
-        "start_url": "__CHAT__",
+        "start_url": "__ERP__",
         "require_login": true,
         "eval": {
             "eval_type": [
@@ -1608,7 +1612,7 @@
         "task_id": "86",
         "task_description": "Send a message \"Standup at 9 AM\" in channel \"Company Portal\".",
         "task_type": "operation",
-        "start_url": "__CHAT__",
+        "start_url": "__ERP__",
         "require_login": true,
         "eval": {
             "eval_type": [
@@ -1625,9 +1629,9 @@
     },
     {
         "task_id": "87",
-        "task_description": "React to the latest message in \"Compay Portal\" with a thumbs up emoji.",
+        "task_description": "Add a 'thumbs up' emoji to the latest message in 'Company Portal'.",
         "task_type": "operation",
-        "start_url": "__CHAT__",
+        "start_url": "__ERP__",
         "require_login": true,
         "eval": {
             "eval_type": [
@@ -1646,7 +1650,7 @@
         "task_id": "88",
         "task_description": "Mention user \"Marc Demo\" in a message inside channel \"Company Portal\".",
         "task_type": "operation",
-        "start_url": "__CHAT__",
+        "start_url": "__ERP__",
         "require_login": true,
         "eval": {
             "eval_type": [
@@ -1665,7 +1669,7 @@
         "task_id": "89",
         "task_description": "Retrieve the Latest Pinned Message in \"Company Portal\" Channel",
         "task_type": "operation",
-        "start_url": "__CHAT__",
+        "start_url": "__ERP__",
         "require_login": true,
         "eval": {
             "eval_type": [
@@ -1679,7 +1683,7 @@
     },
     {
         "task_id": "90",
-        "task_description": "what is status of reference S00002?",
+        "task_description": "What is the status of the sales record with reference S00002?",
         "task_type": "lookup",
         "start_url": "__ERP__",
         "require_login": true,
@@ -1875,302 +1879,6 @@
             "string_match": {
                 "match_type": "semantic",
                 "match_value": "Veronica Costello\n6146 Honey Bluff Parkway\nCalder, Michigan, 49628-7978\nUnited States\nT: (555) 229-3326"
-            }
-        }
-    },
-    {
-        "task_id": "t00",
-        "task_description": "Open Watches menu and retrieve the name of the first product in the list.",
-        "task_type": "lookup",
-        "start_url": "__SHOPPING__",
-        "require_login": false,
-        "eval": {
-            "eval_type": [
-                "string_match",
-                "regex_match",
-                "url_match",
-                "dom_match",
-                "multiset_match",
-                "list_match"
-            ],
-            "string_match": {
-                "match_type": "exact",
-                "match_value": "Aim Analog Watch"
-            },
-            "regex_match": {
-                "email": {
-                    "pattern": "^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$",
-                    "required": "true",
-                    "description": "A valid email address format (e.g., user@example.com)"
-                },
-                "password": {
-                    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+=\\-]{8,}$",
-                    "required": "true",
-                    "description": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, and one number"
-                }
-            },
-            "url_match": {
-                "url": "last",
-                "match_type": "contains",
-                "match_value": "customer/account"
-            },
-            "dom_match": {
-                "url": "http://localhost:8084/aim-analog-watch.html",
-                "dom_extractor": "document.querySelector('#old-price-36 .price').innerText;",
-                "match_type": "exact",
-                "match_value": "$45.00",
-                "description": "{{description}}"
-            },
-            "multiset_match": {
-                "match_value": [
-                    "Beaumont Summit Kit",
-                    "Stellar Solar Jacket"
-                ]
-            },
-            "list_match": {
-                "match_value": [
-                    "Beaumont Summit Kit",
-                    "Stellar Solar Jacket"
-                ]
-            }
-        }
-    },
-    {
-        "task_id": "t01",
-        "task_description": "Open all 'Jackets' menus and retrieve the name of the first product from each.",
-        "task_type": "lookup",
-        "start_url": "__SHOPPING__",
-        "require_login": false,
-        "eval": {
-            "eval_type": [
-                "string_match",
-                "regex_match",
-                "url_match",
-                "dom_match",
-                "multiset_match",
-                "list_match"
-            ],
-            "string_match": {
-                "match_type": "contains",
-                "match_value": "Beaumont Summit Kit"
-            },
-            "regex_match": {
-                "email": {
-                    "pattern": "^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$",
-                    "required": "true",
-                    "description": "A valid email address format (e.g., user@example.com)"
-                },
-                "password": {
-                    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+=\\-]{8,}$",
-                    "required": "true",
-                    "description": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, and one number"
-                }
-            },
-            "url_match": {
-                "url": "last",
-                "match_type": "contains",
-                "match_value": "customer/account"
-            },
-            "dom_match": {
-                "url": "http://localhost:8084/aim-analog-watch.html",
-                "dom_extractor": "document.querySelector('#old-price-36 .price').innerText;",
-                "match_type": "contains",
-                "match_value": "45.0",
-                "description": "{{description}}"
-            },
-            "multiset_match": {
-                "match_value": [
-                    "Beaumont Summit Kit",
-                    "Stellar Solar Jacket"
-                ]
-            },
-            "list_match": {
-                "match_value": [
-                    "Beaumont Summit Kit",
-                    "Stellar Solar Jacket"
-                ]
-            }
-        }
-    },
-    {
-        "task_id": "t02",
-        "task_description": "Open all 'Jackets' menus and retrieve the name of the first product from each.",
-        "task_type": "lookup",
-        "start_url": "__SHOPPING__",
-        "require_login": false,
-        "eval": {
-            "eval_type": [
-                "string_match",
-                "regex_match",
-                "url_match",
-                "dom_match",
-                "multiset_match",
-                "list_match"
-            ],
-            "string_match": {
-                "match_type": "semantic",
-                "match_value": "It is Beaumont Summit Kit"
-            },
-            "regex_match": {
-                "email": {
-                    "pattern": "^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$",
-                    "required": "true",
-                    "description": "A valid email address format (e.g., user@example.com)"
-                },
-                "password": {
-                    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+=\\-]{8,}$",
-                    "required": "true",
-                    "description": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, and one number"
-                }
-            },
-            "url_match": {
-                "url": "last",
-                "match_type": "contains",
-                "match_value": "customer/account"
-            },
-            "dom_match": {
-                "url": "http://localhost:8084/aim-analog-watch.html",
-                "dom_extractor": "document.querySelector('#old-price-36 .price').innerText;",
-                "match_type": "semantic",
-                "match_value": "45 dollars",
-                "description": "{{description}}"
-            },
-            "multiset_match": {
-                "match_value": [
-                    "Stellar Solar Jacket",
-                    "Beaumont Summit Kit"
-                ]
-            },
-            "list_match": {
-                "match_value": [
-                    "Beaumont Summit Kit",
-                    "Stellar Solar Jacket"
-                ]
-            }
-        }
-    },
-    {
-        "task_id": "t03",
-        "task_description": "Retrieve the default shipping address of the customer named \"Veronica Costello\".",
-        "task_type": "lookup",
-        "start_url": "__SHOPPING_ADMIN__",
-        "require_login": true,
-        "eval": {
-            "eval_type": [
-                "string_match"
-            ],
-            "string_match": {
-                "match_type": "semantic",
-                "match_value": "Veronica Costello\n6146 Honey Bluff Parkway\nCalder, Michigan, 49628-7978\nUnited States\nT: (555) 229-3326"
-            }
-        }
-    },
-    {
-        "task_id": "t04",
-        "task_description": "Multiset Match",
-        "task_type": "lookup",
-        "start_url": "__SHOPPING_ADMIN__",
-        "require_login": true,
-        "eval": {
-            "eval_type": [
-                "multiset_match"
-            ],
-            "multiset_match": {
-                "match_value": [
-                    "Stellar Solar Jacket",
-                    "Beaumont Summit Kit"
-                ]
-            }
-        }
-    },
-    {
-        "task_id": "t05",
-        "task_description": "List Match",
-        "task_type": "lookup",
-        "start_url": "__SHOPPING_ADMIN__",
-        "require_login": true,
-        "eval": {
-            "eval_type": [
-                "list_match"
-            ],
-            "list_match": {
-                "match_value": [
-                    "Beaumont Summit Kit",
-                    "Stellar Solar Jacket"
-                ]
-            }
-        }
-    },
-    {
-        "task_id": "t06",
-        "task_description": "Regex Match",
-        "task_type": "form",
-        "start_url": "__SHOPPING__",
-        "require_login": true,
-        "eval": {
-            "eval_type": [
-                "regex_match"
-            ],
-            "regex_match": {
-                "email": {
-                    "pattern": "^[\\w\\.-]+@[\\w\\.-]+\\.\\w{2,}$",
-                    "required": "true",
-                    "description": "A valid email address format (e.g., user@example.com)"
-                },
-                "password": {
-                    "pattern": "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d!@#$%^&*()_+=\\-]{8,}$",
-                    "required": "true",
-                    "description": "Minimum 8 characters, at least one uppercase letter, one lowercase letter, and one number"
-                }
-            }
-        }
-    },
-    {
-        "task_id": "t07",
-        "task_description": "Dom Match Selenium",
-        "task_type": "form",
-        "start_url": "__SHOPPING__",
-        "require_login": true,
-        "eval": {
-            "eval_type": [
-                "dom_match"
-            ],
-            "dom_match": {
-                "url": "http://localhost:8084/aim-analog-watch.html",
-                "dom_extractor": "document.querySelector('#old-price-36 .price').innerText;",
-                "match_type": "contains",
-                "match_value": "45.0",
-                "description": "{{description}}"
-            }
-        }
-    },
-    {
-        "task_id": "t08",
-        "task_description": "Test scenario 8",
-        "task_type": "lookup",
-        "start_url": "__SHOPPING__",
-        "require_login": false,
-        "eval": {
-            "eval_type": [
-                "string_match",
-                "url_match",
-                "dom_match"
-            ],
-            "string_match": {
-                "match_type": "contains",
-                "match_value": "Beaumont Summit Kit"
-            },
-            "url_match": {
-                "url": "last",
-                "match_type": "contains",
-                "match_value": "customer/account"
-            },
-            "dom_match": {
-                "url": "http://localhost:8084/aim-analog-watch.html",
-                "dom_extractor": "document.querySelector('#old-price-36 .price').innerText;",
-                "match_type": "contains",
-                "match_value": "45.0",
-                "description": "{{description}}"
             }
         }
     }

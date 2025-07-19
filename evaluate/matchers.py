@@ -2,19 +2,24 @@ import difflib
 from dotenv import load_dotenv
 import os
 import google.generativeai as genai
-
+import unicodedata
 def exact(value, target):
-    print(f"[exact] value: {value}, target: {target}")
-    """
-    Check if the values match the target exactly.
-    """
+    value = normalize(value)
+    target = normalize(target)
+    print(f"[exact] target: {target}, value: {value}")
     return value == target
 
 def contains(value, target):
     """
     Check if the target is contained within the values.
     """
+    print(f"[contains] Comparing: {repr(target)} vs {repr(value)}")
+    if not value or not target:
+        return False
+    value = normalize(value)
+    target = normalize(target)
     return target in value
+
 
 def semantic(task_description, value, target, method="llm"):    
     if method == "llm":
@@ -28,9 +33,8 @@ def semantic(task_description, value, target, method="llm"):
         prompt = f"""
             You are a helpful evaluator.
             Task: "{task_description}"
-            Agent answer: "{value}"
             Expected answer: "{target}"
-
+            Agent answer: "{value}"
             Are they semantically equivalent in the task context? 
             Reply only YES or NO.
         """
@@ -83,3 +87,23 @@ def check_contains(agent_value, match_value):
     else:
         print(f"Unsupported match_value type: {type(match_value)}")
         return False
+    
+
+def normalize(text):
+    """
+    Chuẩn hóa chuỗi để so sánh:
+    - Ép về str
+    - Chuẩn hóa unicode (NFKC)
+    - Thay non-breaking space (U+00A0) bằng space thường
+    - Bỏ zero-width space, BOM
+    - strip() để bỏ khoảng trắng đầu/cuối
+    """
+    if text is None:
+        return ""
+    return (
+        unicodedata.normalize("NFKC", str(text))
+        .replace('\xa0', ' ')     # non-breaking space → space
+        .replace('\u200b', '')    # zero-width space
+        .replace('\ufeff', '')    # BOM
+        .strip()
+    )
