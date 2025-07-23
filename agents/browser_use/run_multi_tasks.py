@@ -3,6 +3,11 @@ import json
 from multiprocessing import context
 import random
 import sys
+import os
+
+# Add project root to Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 from browser_use import Agent, ChatGoogle, Browser, BrowserConfig, BrowserSession
 from matplotlib import cm
 from playwright.async_api import async_playwright
