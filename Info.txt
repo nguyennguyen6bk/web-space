@@ -26,3 +26,117 @@
 
 	
 
+chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/2401.10935
+chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://aclanthology.org/2024.acl-long.505.pdf
+
+
+ 
+SeeClick trên miniwob + webarena.
+Môi trường nhẹ trước. (150 tasks). tác vụ ngắn. để làm ground truth.
+Evaluation. ./ Benchmark . / 
+Đề Cương.
+Thesis
+Liso / 3 tools/ 2 datasets: Duy -  webarena , miniwob++
+
+
+
+Check with Duy: Liso.
+Hxagent / Li et al. / SeeClick webarena , miniwob++, dataset mới của tôi
+Todo:  
+
+
+29/7: Open docker reddit / gitlab / wiki  
+
+To do: Dạ mai nhớ nhắc em vụ hỏi đề cương nha
+
+
+
+http://localhost:9999/.
+https://auth.axissecurity.com/reset-password?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY1Nzk3MTMsInRlbmFudF9pZCI6IjE2MjVhYzRhMzg3MzRmYTk5MjFkNjBlMDQ4NmU3MWJkIiwic3Rvcm1faWRwIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwidXNlcl9pZCI6ImE2MzhmMjQyOTNmODRkYWY4YTIyZDg4YjQ5ZTE3MDdkIiwiYXV0aF9rZXkiOiI2ZDQwZjdkNC1hMGNlLTQ3ZjAtOTc5YS00OWUxZjk1NGRhYzkiLCJwb3J0YWxfYWRkcmVzcyI6bnVsbCwiYXBwX2lkIjoiNTY1NTg3Y2ItMGMxMi00ZWE2LWI2OTUtNjQzYzViZGRmYTQxIiwiYXBwbGljYXRpb25fdHlwZSI6IlBvcnRhbCIsInVzZXJfZW50aXR5X2lkIjoiYTYzOGYyNDItOTNmOC00ZGFmLThhMjItZDg4YjQ5ZTE3MDdkIn0.n9c7JJWLOXqlsn6fTz0BEG0V8fPzysAGDePUH7VfnbI
+
+tài khoản: nhdang@selab.hcmus.edu.vn, password: Nhdang223
+sau đó em kết nối với server bằng tài khoản: nhdang01          password: nhnvidia123!!
+
+618ec3142ae44617a7fb3e2e6dd22228@ssh.axisapps.io
+
+jupyter notebook --no-browser --port=8889
+
+ssh -L 8889:localhost:8889 618ec3142ae44617a7fb3e2e6dd22228@ssh.axisapps.io
+
+python3 miniwob_test.py   --model_path /raid/nhdang01/ctduy/agent_code/SeeClick/seeclick-miniwob   --qwen_path /raid/nhdang01/ctduy/agent_code/SeeClick/qwen   --imgs_dir_temp /raid/nhdang01/ctduy/agent_code/Nguyen_SeeClick/SeeClick/data/miniwob_images   --num_episodes 1 --env_name all --headless
+
+SeeClick_Checkpoint vs miniwob
+python3 miniwob_test_nguyen.py   --model_path /raid/nhdang01/ctduy/agent_code/SeeClick/SeeClick   --qwen_path /raid/nhdang01/ctduy/agent_code/SeeClick/qwen   --imgs_dir_temp /raid/nhdang01/ctduy/agent_code/SeeClick/data/miniwob_images   --num_episodes 1 --env_name all --headless
+
+
+python3 miniwob_test.py   --model_path /raid/nhdang01/ctduy/agent_code/SeeClick/seeclick-miniwob   --qwen_path /raid/nhdang01/ctduy/agent_code/SeeClick/qwen   --imgs_dir_temp /raid/nhdang01/ctduy/agent_code/SeeClick/data/miniwob_images   --num_episodes 5 --env_name all --headless
+Hxagent vs Li et al + webarena + Myself. (Operation)
+150 in 300 task , Duy. 
+
+
+python main.py --task_id=shopping_1 --eval_only --eval_instance=1
+python main.py --dataset=miniwob --task_id=click-button --eval_only --eval_instance=1
+CHROME_TESTING_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe"
+
+miniwob : OK
+Webarena: 
+
+Profile (yes/no)
+evaluation (manual) / groud truth / 
+chạy SeeClick
+chạy Webarena
+Check Prefix_match
+
+ python main.py --task_id=shopping_4 --eval_only --eval_instance=1
+ 
+ 
+ evaluator_comb = get_evaluators_from_taskid(task_id)
+                            # Gọi evaluator (truyền task_id, driver)
+                            score = evaluator_comb(task_id, driver)
+                            print("Score:", score)
+							
+							
+							
+							
+							
+							
+							SeeAct
+							
+							
+							
+Onlinemind2web 
+Seeact > miniwob++
+SeeAct > Mind2web
+Hxagent > onlinemind2web (p)
+HxAgent + webarena (bị loại bỏ)
+
+https://github.com/MinorJerry/WebVoyager dataset + tool
+
+Mind2Web (offline) ~2,350
+Online-Mind2Web (live) 300
+
+
+onlinemine2web / hxagent / manual
+https://github.com/MinorJerry/WebVoyager
+SeeAct
+https://arxiv.org/pdf/2401.01614#page=1.95
+Seeact: chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://arxiv.org/pdf/2401.01614
+
+sequence / action : so buoc toi uu / exact match . Dung nhu mong doi / action correct / Final 
+
+đường đi đúng (exact match) / kết quả đúng /
+Prefix-match: đúng 1 phần 
+
+Exact Match Rate ( Exact-Match). We consider the generated SoA for a task as correct only if all
+actions are correct. Exact-Match is defined as the ratio of correct results to the total number of results.
+Prefix Match Rate ( Prefix-Match). Prefix-Accuracy is the accuracy of the prefix of a generated SoA for
+a task instance, which is the ratio of continuous correct actions from the start to the first error,
+divided by the total number of actions. Prefix-Match is the average in all instances.
+
+Success-rate : 
+đi 1 lần: 
+
+cách tính của Duy prefix match:
+
+
+Hxagent:
