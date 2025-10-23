@@ -1,13 +1,15 @@
 services:
   mysql:
-    image: nguyen0710/jorani_mysql_hub:v1
+    image: nguyen0710/jorani_mysql_hub:latest
+    container_name: jorani_mysql_hub
     environment:
       MYSQL_DATABASE: jorani
       MYSQL_USER: jorani
       MYSQL_PASSWORD: jorani
       MYSQL_ROOT_PASSWORD: jorani
   jorani:
-    image: nguyen0710/jorani_app_hub:v1
+    image: nguyen0710/jorani_app_hub:latest
+    container_name: jorani_app_hub
     ports:
       - "8085:80"
     depends_on:
