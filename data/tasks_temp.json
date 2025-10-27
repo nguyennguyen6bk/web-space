@@ -17,20 +17,17 @@
     },
     {
         "task_id": "2",
-        "task_description": "Open all 'Jackets' sub-menus and extract the name of the first product from each sub-menu. Return only the product names in a list format.",
-        "task_type": "lookup",
+        "task_description": "Rate the product “Hero Hoodie” with 4 stars.",
+        "task_type": "operation",
         "start_url": "__SHOPPING__",
-        "require_login": false,
+        "require_login": true,
         "eval": {
             "eval_type": [
-                "multiset_match"
+                "string_match"
             ],
-            "multiset_match": {
-                "match_type": "contains",
-                "match_value": [
-                    "Beaumont Summit Kit",
-                    "Stellar Solar Jacket"
-                ]
+            "string_match": {
+                "match_type": "semantic",
+                "match_value": "Veronica Costello\n6146 Honey Bluff Parkway\nCalder, Michigan, 49628-7978\nUnited States\nT: (555) 229-3326"
             }
         }
     },
@@ -140,21 +137,12 @@
     },
     {
         "task_id": "8",
-        "task_description": "Place an order as a customer, then return the order number in JSON format using the key order_number.",
-        "task_type": "operation",
+        "task_description": "Navigate to Watches, apply filter results by price $40–$49.99, sort by Price: Low to High, and view first first product detail page.",
+        "task_type": "lookup",
         "start_url": "__SHOPPING__",
-        "require_login": true,
+        "require_login": false,
         "eval": {
-            "eval_type": [
-                "regex_match"
-            ],
-            "regex_match": {
-                "order_number": {
-                    "pattern": "^0000\\d{5}$",
-                    "required": true,
-                    "description": ""
-                }
-            }
+            "eval_type": []
         }
     },
     {
@@ -548,18 +536,12 @@
     },
     {
         "task_id": "30",
-        "task_description": "Retrieve the current rating (in percent) of the product named 'Fusion Backpack'. Return only the percentage.",
-        "task_type": "operation",
+        "task_description": "Navigate to Watches, apply filter results by price $40–$49.99, sort by Price: Low to High, and view first first product detail page.",
+        "task_type": "lookup",
         "start_url": "__SHOPPING__",
         "require_login": false,
         "eval": {
-            "eval_type": [
-                "string_match"
-            ],
-            "string_match": {
-                "match_type": "exact",
-                "match_value": "67%"
-            }
+            "eval_type": []
         }
     },
     {
@@ -1868,23 +1850,17 @@
     },
     {
         "task_id": "101",
-        "task_description": "Navigate to the default shipping address of customer “Veronica Costello.”",
-        "task_type": "lookup",
-        "start_url": "__SHOPPING_ADMIN__",
+        "task_description": "Add “Overnight Duffle” to comparison, then add “Strive Shoulder Pack” to comparison, and open the Compare Products page.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
         "require_login": true,
         "eval": {
-            "eval_type": [
-                "string_match"
-            ],
-            "string_match": {
-                "match_type": "semantic",
-                "match_value": "Veronica Costello\n6146 Honey Bluff Parkway\nCalder, Michigan, 49628-7978\nUnited States\nT: (555) 229-3326"
-            }
+            "eval_type": []
         }
     },
     {
         "task_id": "102",
-        "task_description": "Rate the product “Hero Hoodie” with 4 stars.",
+        "task_description": "add a new shipping address, and set it as the default shipping address.",
         "task_type": "operation",
         "start_url": "__SHOPPING__",
         "require_login": true,
@@ -1894,9 +1870,543 @@
     },
     {
         "task_id": "103",
+        "task_description": "Update the street of my default billing address to “2222 Sai Gon”.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "104",
+        "task_description": "Add a product review for “Didi Sport Watch” with a 4-star rating and a short comment.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "105",
+        "task_description": "Print Order 000000008.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "106",
+        "task_description": "View details of the last Men’s Indoor Short.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "107",
+        "task_description": "Empty the shopping cart and add three products:  \"Deirdre Relaxed-Fit\", \"Sylvia Capri\", and \"Aeon Capri\" with the same size and color.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "108",
+        "task_description": "View the highest-priced product detail page in Women > Pants.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "109",
+        "task_description": "Find all products with keyword “short” priced between $40 and $42.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "110",
+        "task_description": "View the Returning Gifts policy",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "111",
+        "task_description": "Navigate to the default shipping address of customer “Veronica Costello.”",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "112",
         "task_description": "Update the approval status of rating \"291\" to Not Approved.",
         "task_type": "operation",
         "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "113",
+        "task_description": "Create a customer group named “Wholesale-10”, then create a Catalog Price Rule that gives a 10% discount for this group, and assign this group to the customer account.test.5@mynes.com\n.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "114",
+        "task_description": "Create a Configurable Product “Aether Gym Pant” with attributes Size (S, M, L) and Color (Black, Gray).",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "115",
+        "task_description": "Enable Cash On Delivery Payment method",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "116",
+        "task_description": "View the Coupons Usage Report for the date range from yesterday to today",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "117",
+        "task_description": "Show all products with color Lavender.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "118",
+        "task_description": "Show all female customers.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "119",
+        "task_description": "Change the order status from \"Suspected Fraud\" to \"Suspected Fraud (Untrusted)\".",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "120",
+        "task_description": "Change the payment method name from \"Bank Transfer Payment\" to \"Offline Bank Payment\".",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "121",
+        "task_description": "Change the Admin Session Lifetime to 12 hours.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "122",
+        "task_description": "Edit the status to “Not Approved” for the review with content “These looked really ugly on my feet…\"",
+        "task_type": "operation",
+        "start_url": "__SHOPPING_ADMIN__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "123",
+        "task_description": "Add a new user using the email \"account.test.2@mynes.com\" and assign \"account.test.1@mynes.com\" as the manager.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "124",
+        "task_description": "Log in as employee using username \"qc.lead.1\" and password \"Admin@123\", then log out.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": false,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "125",
+        "task_description": "Assign account.test.1@mynes.com as the manager of account.test.3@mynes.com.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "126",
+        "task_description": "Submit a new two-day leave request from next Monday to next Tuesday.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "127",
+        "task_description": "Submit a half-day leave request for next week Friday morning",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "128",
+        "task_description": "View the list of submitted leave requests.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "129",
+        "task_description": "Cancel the submitted Pending leave request on Oct 9",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "130",
+        "task_description": "Approve a leave request for \"pm ONE\" on December 28.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "131",
+        "task_description": "Reject all leave requests for December 25 with the comment \"It is wellness day.\"",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "132",
+        "task_description": "Filter pending leave requests by employee \"employee FOUR\"",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "133",
+        "task_description": "Update a pending leave request to switch from paid leave to sick leave on September 12.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "134",
+        "task_description": "Change the system language to Vietnamese.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "135",
+        "task_description": "Log in using the provided user = \"accountant1\" and password = \"Admin@123\", then reset the password to \"Jorani@2025\".",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": false,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "136",
+        "task_description": "Change the manager of user = \"account.test.2@mynes.com\" to manager = \"account.test.5@mynes.com\".",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "137",
+        "task_description": "Assign a 3-day marriage leave entitlement for \"account.test.3@mynes.com\" for this year.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "138",
+        "task_description": "Change the login username of \"account.test.4@mynes.com\" to \"developer4\".",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "139",
+        "task_description": "Reset the password for user \"account.test.4@mynes.com\" to \"Jorani@2025\"",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "140",
+        "task_description": "Deactivate the account of \"account.test.6@mynes.com\".",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "141",
+        "task_description": "Update the email of user \"account.test.7@mynes.com\" to \"internship.test.7@mynes.com\".",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "142",
+        "task_description": "Change the position of user \"account.test.4@mynes.com\" from Employee to Manager.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "143",
+        "task_description": "Grant administrator rights to \"admin.test.8@mynes.com\".",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "144",
+        "task_description": "Reject a leave request for user \"pm ONE\" on \"Dec 10\" with a comment \"Insufficient balance.\"",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "145",
+        "task_description": "Create a leave request for \"Dec 4\", then edit it to \"Dec 5\".",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "146",
+        "task_description": "Set the default time zone of user account.test.1@mynes.com to Asia/Ho_Chi_Minh.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "147",
+        "task_description": "Grant a 12-day \"Paid Leave\" entitlement to \"account.test.3@mynes.com\" for the current year.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "148",
+        "task_description": "Create a new department named \"Accountant\", then assign user \"accountant1\" to this department ",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "149",
+        "task_description": "Create a new position named \"internship\" and change position of user  \"internship2\" to internship",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "150",
+        "task_description": "Submit a compensate leave request for the first Monday of next month.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
+        "require_login": true,
+        "eval": {
+            "eval_type": []
+        }
+    },
+    {
+        "task_id": "151",
+        "task_description": "Open all 'Jackets' sub-menus and extract the name of the first product from each sub-menu. Return only the product names in a list format.",
+        "task_type": "lookup",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "multiset_match"
+            ],
+            "multiset_match": {
+                "match_type": "contains",
+                "match_value": [
+                    "Beaumont Summit Kit",
+                    "Stellar Solar Jacket"
+                ]
+            }
+        }
+    },
+    {
+        "task_id": "152",
+        "task_description": "Place an order as a customer, then return the order number in JSON format using the key order_number.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": true,
+        "eval": {
+            "eval_type": [
+                "regex_match"
+            ],
+            "regex_match": {
+                "order_number": {
+                    "pattern": "^0000\\d{5}$",
+                    "required": true,
+                    "description": ""
+                }
+            }
+        }
+    },
+    {
+        "task_id": "153",
+        "task_description": "Retrieve the current rating (in percent) of the product named 'Fusion Backpack'. Return only the percentage.",
+        "task_type": "operation",
+        "start_url": "__SHOPPING__",
+        "require_login": false,
+        "eval": {
+            "eval_type": [
+                "string_match"
+            ],
+            "string_match": {
+                "match_type": "exact",
+                "match_value": "67%"
+            }
+        }
+    },
+    {
+        "task_id": "154",
+        "task_description": "Display all leave requests currently marked as Requested.",
+        "task_type": "operation",
+        "start_url": "__LMS__",
         "require_login": true,
         "eval": {
             "eval_type": []
